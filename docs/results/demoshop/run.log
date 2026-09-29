@@ -1,0 +1,253 @@
+ranking evaluation -- demoshop (http://127.0.0.1:8899/)
+  candidates 200, vulnerable 32, unlabeled 0, verified 20 (top-20)
+
+Recall@K                                                      K=1     K=3     K=5     K=10    K=20  
+               Random predictor                               0.005   0.015   0.025   0.050   0.100 
+               VulnSpider without focused verification        0.031   0.094   0.156   0.219   0.469 
+               VulnSpider (full pipeline)                     0.031   0.094   0.156   0.219   0.500 
+               Random predictor (per-input-point type guess)  0.005   0.015   0.025   0.050   0.101 
+
+Precision@K                                                   K=1     K=3     K=5     K=10    K=20  
+               Random predictor                               0.160   0.160   0.160   0.160   0.160 
+               VulnSpider without focused verification        1.000   1.000   1.000   0.700   0.750 
+               VulnSpider (full pipeline)                     1.000   1.000   1.000   0.700   0.800 
+               Random predictor (per-input-point type guess)  0.161   0.161   0.161   0.161   0.161 
+
+MAP@K                                                         K=1     K=3     K=5     K=10    K=20  
+               Random predictor                               0.160   0.107   0.087   0.064   0.049 
+               VulnSpider without focused verification        1.000   1.000   1.000   0.688   0.657 
+               VulnSpider (full pipeline)                     1.000   1.000   1.000   0.688   0.701 
+               Random predictor (per-input-point type guess)  0.161   0.108   0.087   0.065   0.050 
+
+NDCG@K                                                        K=1     K=3     K=5     K=10    K=20  
+               Random predictor                               0.160   0.160   0.160   0.160   0.160 
+               VulnSpider without focused verification        1.000   1.000   1.000   0.797   0.803 
+               VulnSpider (full pipeline)                     1.000   1.000   1.000   0.797   0.836 
+               Random predictor (per-input-point type guess)  0.161   0.161   0.161   0.161   0.161 
+
+vulnspider: comparison table -> docs/results/demoshop/evaluation-table.html
+vulnspider: input-point table -> docs/results/demoshop/evaluation-inputs.html
+vulnspider: (markdown copies alongside: evaluation-table.md, evaluation-inputs.md)
+vulnspider: [OK] scan complete (mode=static, selected=20)
+vulnspider: analysis output:     docs\results\demoshop\analysis.json
+vulnspider: verification output: docs\results\demoshop\verification.json
+vulnspider: dashboard report ->  docs/results/demoshop/dashboard.html
+vulnspider: detail report ->     docs/results/demoshop/verification-detail.html
+
+진행 상태: |[32m                                                                             [0m| 0/4 단계 [0m
+진행 상태: |[32m                                                                     [0m| 0/4 단계 , 초기화
+진행 상태: |[32m████████████████                                                [0m| 1/4 단계 , 크롤 + 분석[0m
+진행 상태: |[32m████████████████████████████████                                [0m| 2/4 단계 , 크롤 + 분석[0m
+                                                                                                    
+vulnspider: [*] 크롤 + 분석 시작 -> http://127.0.0.1:8899/
+
+진행 상태: |[32m████████████████████████████████                                [0m| 2/4 단계 , 크롤 + 분석[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████                                [0m| 2/4 단계 , 크롤 + 분석[0m
+                                                                                                    
+vulnspider: [OK] 분석 완료 -- endpoints=37, input_points=100
+
+진행 상태: |[32m████████████████████████████████                                [0m| 2/4 단계 , 크롤 + 분석[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████                                [0m| 2/4 단계 , 크롤 + 분석[0m
+진행 상태: |[32m████████████████████████                        [0m| 2/4 단계 , 검증 (focused verification)[0m
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider: [*] 검증 (focused verification) 시작 -- proposer=deterministic, top-k=20
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 1/20: SQLI rank 1               elapsed time : 0.29s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 2/20: SQLI rank 2               elapsed time : 0.34s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 3/20: SQLI rank 3               elapsed time : 0.41s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 4/20: SQLI rank 4               elapsed time : 0.33s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 5/20: SQLI rank 5               elapsed time : 0.47s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 6/20: SQLI rank 6               elapsed time : 0.37s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 7/20: SQLI rank 7               elapsed time : 0.44s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 8/20: SQLI rank 8               elapsed time : 0.31s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 9/20: SQLI rank 9               elapsed time : 0.41s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 10/20: SQLI rank 10              elapsed time : 0.41s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 11/20: SQLI rank 11              elapsed time : 0.33s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 12/20: REFLECTED_XSS rank 12     elapsed time : 0.21s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 13/20: REFLECTED_XSS rank 13     elapsed time : 0.21s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 14/20: REFLECTED_XSS rank 14     elapsed time : 0.26s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 15/20: REFLECTED_XSS rank 15     elapsed time : 0.19s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 16/20: REFLECTED_XSS rank 16     elapsed time : 0.23s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 17/20: REFLECTED_XSS rank 17     elapsed time : 0.17s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 18/20: REFLECTED_XSS rank 18     elapsed time : 0.21s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 19/20: REFLECTED_XSS rank 19     elapsed time : 0.20s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider:     - 검증 20/20: REFLECTED_XSS rank 20     elapsed time : 0.37s
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+vulnspider: [OK] 검증 완료 -- 후보 20, 제안 59, 통과 59/차단 0, supported 49, weakened 4, unchanged 6
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████            [0m| 3/4 단계 , 검증 (focused verification)[0m
+진행 상태: |[32m████████████████████████████████████████████████                [0m| 3/4 단계 , 리포트 작성[0m
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m
+                                                                                                    
+vulnspider: [*] 리포트 작성 시작 …
+
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m
+                                                                                                    
+vulnspider: [OK] 리포트 작성 완료
+
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m
+                                                                                                    
+
+
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m
+진행 상태: |[32m████████████████████████████████████████████████████████████████[0m| 4/4 단계 , 리포트 작성[0m

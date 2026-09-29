@@ -1,0 +1,339 @@
+{
+  "report_version": "live-evaluation-v1",
+  "metrics_version": "ranking-metrics-v1",
+  "application_id": "demoshop",
+  "target": "http://127.0.0.1:8899/portal/",
+  "top_k": 20,
+  "cutoffs": [
+    1,
+    3,
+    5,
+    10,
+    20
+  ],
+  "counts": {
+    "candidates": 9,
+    "relevant": 2,
+    "unlabeled": 0,
+    "verified": 9
+  },
+  "arms": [
+    {
+      "name": "Random predictor",
+      "metrics_version": "ranking-metrics-v1",
+      "total_candidates": 9,
+      "total_relevant": 2,
+      "total_unlabeled": 0,
+      "cutoffs": [
+        {
+          "k": 1,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.1111111111111111,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 0.2222222222222222,
+          "map_at_k": 0.2222222222222222
+        },
+        {
+          "k": 3,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.3333333333333333,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 0.2903496880850509,
+          "map_at_k": 0.21990740740740738
+        },
+        {
+          "k": 5,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.5555555555555556,
+          "precision_at_k": 0.22222222222222224,
+          "ndcg_at_k": 0.40174209593880367,
+          "map_at_k": 0.29143518518518513
+        },
+        {
+          "k": 10,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 0.5796958592284679,
+          "map_at_k": 0.4000385802469136
+        },
+        {
+          "k": 20,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 0.5796958592284679,
+          "map_at_k": 0.4000385802469136
+        }
+      ]
+    },
+    {
+      "name": "VulnSpider without focused verification",
+      "metrics_version": "ranking-metrics-v1",
+      "total_candidates": 9,
+      "total_relevant": 2,
+      "total_unlabeled": 0,
+      "cutoffs": [
+        {
+          "k": 1,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.5,
+          "precision_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 3,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.6666666666666666,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 5,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.4,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 10,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 20,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        }
+      ]
+    },
+    {
+      "name": "VulnSpider (full pipeline)",
+      "metrics_version": "ranking-metrics-v1",
+      "total_candidates": 9,
+      "total_relevant": 2,
+      "total_unlabeled": 0,
+      "cutoffs": [
+        {
+          "k": 1,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.5,
+          "precision_at_k": 1.0,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 3,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.6666666666666666,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 5,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.4,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 10,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        },
+        {
+          "k": 20,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222222,
+          "ndcg_at_k": 1.0,
+          "map_at_k": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Random predictor (per-input-point type guess)",
+      "metrics_version": "ranking-metrics-v1",
+      "total_candidates": 9,
+      "total_relevant": 2,
+      "total_unlabeled": 0,
+      "cutoffs": [
+        {
+          "k": 1,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.11950000000000044,
+          "precision_at_k": 0.23900000000000088,
+          "ndcg_at_k": 0.23900000000000088,
+          "map_at_k": 0.23900000000000088
+        },
+        {
+          "k": 3,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.3414285714285718,
+          "precision_at_k": 0.22761904761904767,
+          "ndcg_at_k": 0.300398904840498,
+          "map_at_k": 0.2296944444444423
+        },
+        {
+          "k": 5,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 0.5609523809523804,
+          "precision_at_k": 0.224380952380953,
+          "ndcg_at_k": 0.41043869059888044,
+          "map_at_k": 0.300580634920634
+        },
+        {
+          "k": 10,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222265,
+          "ndcg_at_k": 0.5862315867628877,
+          "map_at_k": 0.40796610355253293
+        },
+        {
+          "k": 20,
+          "queries": 1,
+          "scored_queries": 1,
+          "recall_at_k": 1.0,
+          "precision_at_k": 0.2222222222222265,
+          "ndcg_at_k": 0.5862315867628877,
+          "map_at_k": 0.40796610355253293
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "acand_d0e47503abcdbd8b",
+      "canonical_path": "/portal/order",
+      "parameter_name": "ref",
+      "parameter_location": "QUERY",
+      "family": "BROKEN_ACCESS_CONTROL",
+      "prior_probability": 0.9529466945914306,
+      "final_confidence": 0.9529466945914306,
+      "verified": true,
+      "vulnerable": true
+    },
+    {
+      "candidate_id": "acand_aa372664fd28d7ea",
+      "canonical_path": "/portal/message",
+      "parameter_name": "thread",
+      "parameter_location": "QUERY",
+      "family": "BROKEN_ACCESS_CONTROL",
+      "prior_probability": 0.9529025205276623,
+      "final_confidence": 0.9529025205276623,
+      "verified": true,
+      "vulnerable": true
+    },
+    {
+      "candidate_id": "cand_a44e9b65c96aa368",
+      "canonical_path": "/portal/card",
+      "parameter_name": "card_id",
+      "parameter_location": "QUERY",
+      "family": "SQLI",
+      "prior_probability": 0.5495428634774664,
+      "final_confidence": 0.44809769536022176,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "acand_7a7857c8557a8cd3",
+      "canonical_path": "/portal/card",
+      "parameter_name": "card_id",
+      "parameter_location": "QUERY",
+      "family": "BROKEN_ACCESS_CONTROL",
+      "prior_probability": 0.5279609246184335,
+      "final_confidence": 0.3570848116460398,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "cand_b43142e5d01f35bf",
+      "canonical_path": "/portal/message",
+      "parameter_name": "thread",
+      "parameter_location": "QUERY",
+      "family": "REFLECTED_XSS",
+      "prior_probability": 0.4350699107535104,
+      "final_confidence": 0.2207682043351422,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "cand_6a59e6cdc7dd5cd1",
+      "canonical_path": "/portal/order",
+      "parameter_name": "ref",
+      "parameter_location": "QUERY",
+      "family": "REFLECTED_XSS",
+      "prior_probability": 0.4345978569354425,
+      "final_confidence": 0.22043793957534602,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "cand_170106dd1622a036",
+      "canonical_path": "/portal/card",
+      "parameter_name": "card_id",
+      "parameter_location": "QUERY",
+      "family": "REFLECTED_XSS",
+      "prior_probability": 0.3897086168385822,
+      "final_confidence": 0.1902267949320608,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "cand_a22cd77eec74f0d6",
+      "canonical_path": "/portal/message",
+      "parameter_name": "thread",
+      "parameter_location": "QUERY",
+      "family": "SQLI",
+      "prior_probability": 0.23124784011850535,
+      "final_confidence": 0.16680222507338227,
+      "verified": true,
+      "vulnerable": false
+    },
+    {
+      "candidate_id": "cand_04c23c90c4132562",
+      "canonical_path": "/portal/order",
+      "parameter_name": "ref",
+      "parameter_location": "QUERY",
+      "family": "SQLI",
+      "prior_probability": 0.2302379429285601,
+      "final_confidence": 0.16601299413369316,
+      "verified": true,
+      "vulnerable": false
+    }
+  ]
+}

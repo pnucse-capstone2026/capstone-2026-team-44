@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VulnSpider 검증 상세 리포트</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f24;--muted:#6b7280;--line:#e5e7eb;
+--ok:#0e9f6e;--bad:#e02424;--warn:#c27803;--accent:#2563eb;--code:#f3f4f6;--inj:#fde68a;--injink:#92400e;}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1216;--card:#171b21;--ink:#e6e9ee;--muted:#9aa4b2;--line:#262b33;--ok:#31c48d;--bad:#f98080;--warn:#e3a008;--accent:#60a5fa;--code:#1f242c;--inj:#78500a;--injink:#fde68a;}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 18px;font-size:13px}
+.summary{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:96px}
+.stat b{display:block;font-size:20px}.stat span{color:var(--muted);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 18px}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rank{font-weight:700;color:var(--muted)}
+.vtype{font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;color:#fff}
+.vtype.sqli{background:#7c3aed}.vtype.xss{background:#0ea5e9}
+.outcome-badge{margin-left:auto}
+.baseline-box{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:10px;overflow-x:auto}
+.blabel{display:inline-block;font-size:11px;font-weight:700;color:var(--muted);margin-right:8px;text-transform:uppercase}
+.req{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;white-space:nowrap}
+.req .m{color:#fff;background:var(--accent);border-radius:4px;padding:1px 6px;font-weight:700;font-size:11px}
+.req .u{color:var(--ink);word-break:break-all}
+.req .bodytag{color:var(--muted);font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+mark.inj{background:var(--inj);color:var(--injink);border-radius:4px;padding:0 3px;font-weight:700}
+.reqval{background:var(--code);padding:2px 6px;border-radius:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.narrative{margin:8px 0 12px}.delta{font-weight:700}
+.confbar{margin:0 0 14px}.bar{height:8px;background:var(--code);border-radius:5px;overflow:hidden;margin:3px 0}
+.fill{height:100%}.fill.prior{background:var(--muted)}.fill.final{background:var(--accent)}
+.conflabels{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+table.payloads{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+table.payloads th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:6px 8px}
+table.payloads td{padding:7px 8px;vertical-align:top;border-bottom:1px solid var(--line)}
+.payload-row td{border-bottom:none}.idx{color:var(--muted)}.num{text-align:right;font-variant-numeric:tabular-nums}
+.pv{max-width:560px;overflow-x:auto}
+.fam{color:var(--muted);font-size:12px}.sig{color:var(--muted);font-size:11px;margin-top:2px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.pill.ok{background:var(--ok)}.pill.bad{background:var(--bad)}.pill.warn{background:var(--warn)}
+.pill.muted{background:var(--muted)}.reason{color:var(--bad);font-size:11px}
+.detail-row td{padding-top:0;padding-bottom:12px}
+.rationale{font-size:12px;color:var(--muted);margin:2px 0 6px}
+.rationale .tag{display:inline-block;background:var(--code);color:var(--ink);border-radius:5px;padding:1px 6px;margin-right:6px;font-weight:600}
+ul.evidence{margin:4px 0;padding-left:18px;font-size:12px;color:var(--muted)}
+ul.evidence code{background:var(--code);padding:1px 4px;border-radius:4px}
+.dir{color:var(--accent)}.flips{font-size:12px;color:var(--muted);margin-top:4px}
+.flips code{background:var(--code);padding:1px 5px;border-radius:4px}
+.muted-text{color:var(--muted)}
+footer{color:var(--muted);font-size:12px;margin-top:24px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>VulnSpider · 변형 페이로드 검증 상세 리포트</h1>
+<p class="sub">target <b>http://127.0.0.1:8899/</b> · provider deterministic-baseline · 생성 2026-09-25 00:16:23 · source <code>focused verification (in-memory)</code> · 요청 URL은 크롤 결과와 조인해 구성</p>
+<div class="summary"><div class='stat'><b>20</b><span>검증 후보</span></div><div class='stat'><b>59</b><span>변형 페이로드</span></div><div class='stat'><b>59</b><span>검증기 통과</span></div><div class='stat'><b>0</b><span>검증기 차단</span></div><div class='stat'><b>49</b><span>SUPPORTED</span></div><div class='stat'><b>4</b><span>WEAKENED</span></div></div>
+
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#1</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/dashboard?<mark class='inj'>seller_id=northpeak</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/dashboard?<mark class='inj'>seller_id=northpeak</mark></span></span> 의 <code>seller_id</code> 파라미터를 변형 페이로드 <b>3</b>개로 치환해 재프로브했습니다. 검증기가 <b>3</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>3</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.881</b> → <b>0.953</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.1%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.3%"></div></div>
+        <div class="conflabels"><span>prior 0.881</span><span>final 0.953</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/dashboard?<mark class='inj'>seller_id=VULNSPIDER_43446A1E4230EE22&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/dashboard?<mark class='inj'>seller_id=VULNSPIDER_BA248487EEA7765D&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/dashboard?<mark class='inj'>seller_id=VULNSPIDER_ABBC7A338D27AC6C&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#2</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=101</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=101</mark></span></span> 의 <code>product_id</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.880</b> → <b>0.952</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.880</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=VULNSPIDER_778223030D074756&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=VULNSPIDER_9F9AE93A7D97A5D8&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=VULNSPIDER_E62FE3913AE7CF60&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>product_id=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.095</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 0.0 <span class='dir'>(down)</span> — The baseline SQL error did not reproduce under the metacharacter payload; confidence is lowered.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#3</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=20240517</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=20240517</mark></span></span> 의 <code>order_id</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.880</b> → <b>0.952</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.880</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=VULNSPIDER_6D871B8A514CEE9C&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=VULNSPIDER_F21EA2794E0C1039&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=VULNSPIDER_8EF2CCA5C36DCC3B&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/orders?<mark class='inj'>order_id=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.095</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 0.0 <span class='dir'>(down)</span> — The baseline SQL error did not reproduce under the metacharacter payload; confidence is lowered.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#4</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/cart?<mark class='inj'>coupon=WELCOME10</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/cart?<mark class='inj'>coupon=WELCOME10</mark></span></span> 의 <code>coupon</code> 파라미터를 변형 페이로드 <b>3</b>개로 치환해 재프로브했습니다. 검증기가 <b>3</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>3</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.880</b> → <b>0.952</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.880</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/cart?<mark class='inj'>coupon=VULNSPIDER_0CDBB17804B40C73&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/cart?<mark class='inj'>coupon=VULNSPIDER_4DC9D5959ED683CD&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/cart?<mark class='inj'>coupon=VULNSPIDER_074932E2EF558D87&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#5</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=101</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=101</mark></span></span> 의 <code>id</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.880</b> → <b>0.952</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.880</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=VULNSPIDER_68939255C282A4CF&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=VULNSPIDER_4C1DB3799428C2BA&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=VULNSPIDER_6822751248D6AD2F&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>id=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.095</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 0.0 <span class='dir'>(down)</span> — The baseline SQL error did not reproduce under the metacharacter payload; confidence is lowered.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#6</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/compare?<mark class='inj'>ids=101,104</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/compare?<mark class='inj'>ids=101,104</mark></span></span> 의 <code>ids</code> 파라미터를 변형 페이로드 <b>3</b>개로 치환해 재프로브했습니다. 검증기가 <b>3</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>3</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.880</b> → <b>0.952</b> (<span class='delta'>+0.072</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:88.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.880</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/compare?<mark class='inj'>ids=VULNSPIDER_A3E1EE53BFF56958&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/compare?<mark class='inj'>ids=VULNSPIDER_8AA13AA1A1663E48&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/compare?<mark class='inj'>ids=VULNSPIDER_CAC7A584F52D29F0&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.072</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#7</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=12</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=12</mark></span></span> 의 <code>stock</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.879</b> → <b>0.952</b> (<span class='delta'>+0.073</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:87.9%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.879</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=VULNSPIDER_AF759EC2BE026DA9&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=VULNSPIDER_F9DBD5CCD7D39CCA&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=VULNSPIDER_A25D21FC621C09E2&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/seller/product/edit?<mark class='inj'>stock=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#8</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/catalog?<mark class='inj'>brand=northpeak</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/catalog?<mark class='inj'>brand=northpeak</mark></span></span> 의 <code>brand</code> 파라미터를 변형 페이로드 <b>3</b>개로 치환해 재프로브했습니다. 검증기가 <b>3</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>3</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.879</b> → <b>0.952</b> (<span class='delta'>+0.073</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:87.9%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.879</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/catalog?<mark class='inj'>brand=VULNSPIDER_62C17DADBF2F8C06&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/catalog?<mark class='inj'>brand=VULNSPIDER_866DAAC705D65052&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/catalog?<mark class='inj'>brand=VULNSPIDER_9F471E3E32D6798A&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#9</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=1</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=1</mark></span></span> 의 <code>qty</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.879</b> → <b>0.952</b> (<span class='delta'>+0.073</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:87.9%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.879</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=VULNSPIDER_37BCA38D7F519F68&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=VULNSPIDER_7E4628FF41CF5455&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=VULNSPIDER_ED0EDD21B1E21F4C&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product?<mark class='inj'>qty=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#10</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=0</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=0</mark></span></span> 의 <code>min_price</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.879</b> → <b>0.952</b> (<span class='delta'>+0.073</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:87.9%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.879</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=VULNSPIDER_4139B22A2CD4BBFB&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=VULNSPIDER_73AF14F260A1BEB5&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=VULNSPIDER_6AD90FD8C57DDCDF&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/search?<mark class='inj'>min_price=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#11</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/admin/users?<mark class='inj'>q=soohoon</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/admin/users?<mark class='inj'>q=soohoon</mark></span></span> 의 <code>q</code> 파라미터를 변형 페이로드 <b>3</b>개로 치환해 재프로브했습니다. 검증기가 <b>3</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>3</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.878</b> → <b>0.952</b> (<span class='delta'>+0.073</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:87.8%"></div></div>
+        <div class="bar"><div class="fill final" style="width:95.2%"></div></div>
+        <div class="conflabels"><span>prior 0.878</span><span>final 0.952</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/admin/users?<mark class='inj'>q=VULNSPIDER_69011EB0F38DC1D5&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/admin/users?<mark class='inj'>q=VULNSPIDER_836240225435A351&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.096</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 0.0 <span class='dir'>(down)</span> — The baseline SQL error did not reproduce under the metacharacter payload; confidence is lowered.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/admin/users?<mark class='inj'>q=VULNSPIDER_F8F8F62A80F80DE4&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.073</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>sql_error_pattern</code>: 1.0 → 1.0 <span class='dir'>(flat)</span> — The SQL error signature reproduced under an independent metacharacter payload; the baseline suspicion is confirmed.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#12</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/support/chat?<mark class='inj'>nickname=soohoon</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/support/chat?<mark class='inj'>nickname=soohoon</mark></span></span> 의 <code>nickname</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/support/chat?<mark class='inj'>nickname=VULNSPIDER_EFC6D550ED2DF32DZ&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/support/chat?<mark class='inj'>nickname=VULNSPIDER_98D53AC118EF5DBFZ&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#13</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/api/suggest?<mark class='inj'>term=sne</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/api/suggest?<mark class='inj'>term=sne</mark></span></span> 의 <code>term</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/api/suggest?<mark class='inj'>term=VULNSPIDER_8923962A5E67C795Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/api/suggest?<mark class='inj'>term=VULNSPIDER_414414F159AF099FZ&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#14</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/address?<mark class='inj'>city=부산</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/address?<mark class='inj'>city=부산</mark></span></span> 의 <code>city</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/address?<mark class='inj'>city=VULNSPIDER_F80B1B49D53BD8C4Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/address?<mark class='inj'>city=VULNSPIDER_DE0609D822859E2FZ&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#15</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/event?<mark class='inj'>banner=spring-sale</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/event?<mark class='inj'>banner=spring-sale</mark></span></span> 의 <code>banner</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/event?<mark class='inj'>banner=VULNSPIDER_CA17B64FE11D5F06Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/event?<mark class='inj'>banner=VULNSPIDER_793DBB15F004A573Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#16</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/profile?<mark class='inj'>nickname=soohoon</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/profile?<mark class='inj'>nickname=soohoon</mark></span></span> 의 <code>nickname</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/profile?<mark class='inj'>nickname=VULNSPIDER_BE4BCCD85E1C8A23Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/profile?<mark class='inj'>nickname=VULNSPIDER_6FC5F722D0B88276Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#17</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/coupon?<mark class='inj'>campaign=봄맞이</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/coupon?<mark class='inj'>campaign=봄맞이</mark></span></span> 의 <code>campaign</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/coupon?<mark class='inj'>campaign=VULNSPIDER_9E7EB50DAE89A331Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/promo/coupon?<mark class='inj'>campaign=VULNSPIDER_7A65C7ECA941BFAAZ&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#18</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill muted outcome-badge">UNCHANGED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/login?<mark class='inj'>next=/cart</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/login?<mark class='inj'>next=/cart</mark></span></span> 의 <code>next</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>UNCHANGED</b> (신호 <code>UNCHANGED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.611</b> (<span class='delta'>-0.199</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:61.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.611</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/login?<mark class='inj'>next=VULNSPIDER_A06CF685DF4CC24DZ&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.00880710859479437 → 0.00880710859479437 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/login?<mark class='inj'>next=VULNSPIDER_4047B01DC5B77784Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.00880710859479437 → 0.010379806558150507 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#19</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill ok outcome-badge">SUPPORTED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product/qna?<mark class='inj'>q=배송</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product/qna?<mark class='inj'>q=배송</mark></span></span> 의 <code>q</code> 파라미터를 변형 페이로드 <b>2</b>개로 치환해 재프로브했습니다. 검증기가 <b>2</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>2</b>개의 결과가 <b>SUPPORTED</b> (신호 <code>SUPPORT_REPRODUCED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.921</b> (<span class='delta'>+0.110</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:92.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.921</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product/qna?<mark class='inj'>q=VULNSPIDER_FE65AFF06BAC3949Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/product/qna?<mark class='inj'>q=VULNSPIDER_AA54C77F1B8DED0CZ&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill ok">SUPPORTED</span><div class="sig">SUPPORT_REPRODUCED</div></td>
+        <td class="num">+0.110</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 0.0 → 0.0 <span class='dir'>(flat)</span> — The payload again reflected with its dangerous characters un-encoded; the baseline suspicion is confirmed.</li></ul>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#20</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill muted outcome-badge">UNCHANGED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=1042</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=1042</mark></span></span> 의 <code>uid</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>UNCHANGED</b> (신호 <code>UNCHANGED</code>)로 판정되어, confidence 는 <b>0.810</b> → <b>0.611</b> (<span class='delta'>-0.199</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:81.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:61.1%"></div></div>
+        <div class="conflabels"><span>prior 0.810</span><span>final 0.611</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=VULNSPIDER_9CAF5B9685241509Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.008226172465960666 → 0.008226172465960666 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=VULNSPIDER_6CE2A6ADDCD2FC12Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.008226172465960666 → 0.009644478063540091 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.008226172465960666 → 0.0005673222390317701 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/account/points?<mark class='inj'>uid=2147483648</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.008226172465960666 → 0.00170196671709531 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+<footer>각 변형 페이로드는 전송 전에 결정적 PayloadValidator를 통과했으며, 재프로브는 loopback 대상에 한정됩니다. 변형 요청 값은 모델이 생성한 원문 그대로(HTML 문자만 이스케이프) 표시됩니다.</footer>
+</div></body></html>

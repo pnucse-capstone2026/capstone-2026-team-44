@@ -1,0 +1,351 @@
+{
+  "candidates": [
+    {
+      "access_probe_plan_id": "accplan_28215c10202be47b",
+      "candidate_id": "acand_50fd39bd4724d812",
+      "category": "BROKEN_ACCESS_CONTROL",
+      "check_kind": "IDENTIFIER_SUBSTITUTION",
+      "endpoint_id": "ep_322fc24f988637e8",
+      "evidence": [
+        {
+          "access_probe_plan_id": "accplan_28215c10202be47b",
+          "candidate_id": "acand_50fd39bd4724d812",
+          "check_kind": "IDENTIFIER_SUBSTITUTION",
+          "contribution": 20.0,
+          "feature_name": "access_body_size_similarity_ratio",
+          "feature_value": 1.0,
+          "observed": true,
+          "reason": "Comparison response body is similarly sized to the reference response, suggesting it received substantive content rather than a rejection/error page.",
+          "weight": 20.0
+        },
+        {
+          "access_probe_plan_id": "accplan_28215c10202be47b",
+          "candidate_id": "acand_50fd39bd4724d812",
+          "check_kind": "IDENTIFIER_SUBSTITUTION",
+          "contribution": 55.0,
+          "feature_name": "access_unauthorized_success",
+          "feature_value": 1.0,
+          "observed": true,
+          "reason": "Comparison request was not denied (2xx) despite missing credentials or referencing a different identifier -- the primary Broken Access Control signal.",
+          "weight": 55.0
+        }
+      ],
+      "input_point_id": "inp_d4dd485c03213a20",
+      "rank": 1,
+      "raw_rank_score": 75.0,
+      "raw_rank_score_max": 75.0,
+      "resource_owner_context": "baseline value observed during discovery for query.id",
+      "resource_reference": "query.id on GET /product",
+      "scorer_version": "access-control-weighted-v1",
+      "selection_priority": 1.0,
+      "subject_context": "ORIGINAL"
+    },
+    {
+      "access_probe_plan_id": "accplan_ffdd50d4f5b2df89",
+      "candidate_id": "acand_59d69bfb131e7677",
+      "category": "BROKEN_ACCESS_CONTROL",
+      "check_kind": "CREDENTIAL_STRIP",
+      "endpoint_id": "ep_68c3b8da39dc4ca1",
+      "evidence": [
+        {
+          "access_probe_plan_id": "accplan_ffdd50d4f5b2df89",
+          "candidate_id": "acand_59d69bfb131e7677",
+          "check_kind": "CREDENTIAL_STRIP",
+          "contribution": 20.0,
+          "feature_name": "access_body_size_similarity_ratio",
+          "feature_value": 1.0,
+          "observed": true,
+          "reason": "Comparison response body is similarly sized to the reference response, suggesting it received substantive content rather than a rejection/error page.",
+          "weight": 20.0
+        },
+        {
+          "access_probe_plan_id": "accplan_ffdd50d4f5b2df89",
+          "candidate_id": "acand_59d69bfb131e7677",
+          "check_kind": "CREDENTIAL_STRIP",
+          "contribution": 55.0,
+          "feature_name": "access_unauthorized_success",
+          "feature_value": 1.0,
+          "observed": true,
+          "reason": "Comparison request was not denied (2xx) despite missing credentials or referencing a different identifier -- the primary Broken Access Control signal.",
+          "weight": 55.0
+        }
+      ],
+      "input_point_id": null,
+      "rank": 2,
+      "raw_rank_score": 75.0,
+      "raw_rank_score_max": 75.0,
+      "resource_owner_context": "credentials observed during discovery (session cookie or Authorization header)",
+      "resource_reference": "GET /account",
+      "scorer_version": "access-control-weighted-v1",
+      "selection_priority": 1.0,
+      "subject_context": "ANONYMOUS"
+    },
+    {
+      "candidate_id": "cand_404bdc9da19de1ee",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_404bdc9da19de1ee",
+          "contribution": 20.0,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_5f30f4f83a1483da",
+          "observed": true,
+          "reason": "Observed response-length difference raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        },
+        {
+          "candidate_id": "cand_404bdc9da19de1ee",
+          "contribution": 35.0,
+          "feature_name": "sql_error_pattern",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_5f30f4f83a1483da",
+          "observed": true,
+          "reason": "Observed new SQL error pattern raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_404bdc9da19de1ee",
+          "contribution": 20.0,
+          "feature_name": "status_code_changed",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_5f30f4f83a1483da",
+          "observed": true,
+          "reason": "Observed status-code change raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        }
+      ],
+      "feature_vector_id": "fv_5f30f4f83a1483da",
+      "input_point_id": "inp_d4dd485c03213a20",
+      "rank": 3,
+      "raw_rank_score": 75.0,
+      "raw_rank_score_max": 75.0,
+      "scorer_version": "sqli-weighted-v1",
+      "selection_priority": 1.0,
+      "vulnerability_type": "SQLI"
+    },
+    {
+      "candidate_id": "cand_84b05c14a9207160",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_84b05c14a9207160",
+          "contribution": 35.0,
+          "feature_name": "marker_reflected",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_5f30f4f83a1483da",
+          "observed": true,
+          "reason": "Observed new marker reflection raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_84b05c14a9207160",
+          "contribution": 10.0,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_5f30f4f83a1483da",
+          "observed": true,
+          "reason": "Observed response-length difference raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 10.0
+        }
+      ],
+      "feature_vector_id": "fv_5f30f4f83a1483da",
+      "input_point_id": "inp_d4dd485c03213a20",
+      "rank": 4,
+      "raw_rank_score": 45.0,
+      "raw_rank_score_max": 45.0,
+      "scorer_version": "reflected-xss-weighted-v1",
+      "selection_priority": 1.0,
+      "vulnerability_type": "REFLECTED_XSS"
+    },
+    {
+      "candidate_id": "cand_eac1909d851334ed",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_eac1909d851334ed",
+          "contribution": 35.0,
+          "feature_name": "marker_reflected",
+          "feature_value": 1.0,
+          "feature_vector_id": "fv_9daab12b3a2ccbb0",
+          "observed": true,
+          "reason": "Observed new marker reflection raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_eac1909d851334ed",
+          "contribution": 5.348837209302325,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 0.5348837209302325,
+          "feature_vector_id": "fv_9daab12b3a2ccbb0",
+          "observed": true,
+          "reason": "Observed response-length difference raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 10.0
+        }
+      ],
+      "feature_vector_id": "fv_9daab12b3a2ccbb0",
+      "input_point_id": "inp_9fa3cda4a4d5fc17",
+      "rank": 5,
+      "raw_rank_score": 40.348837209302324,
+      "raw_rank_score_max": 45.0,
+      "scorer_version": "reflected-xss-weighted-v1",
+      "selection_priority": 0.896640826873385,
+      "vulnerability_type": "REFLECTED_XSS"
+    },
+    {
+      "candidate_id": "cand_9254d3edae7924bc",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_9254d3edae7924bc",
+          "contribution": 10.69767441860465,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 0.5348837209302325,
+          "feature_vector_id": "fv_9daab12b3a2ccbb0",
+          "observed": true,
+          "reason": "Observed response-length difference raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        },
+        {
+          "candidate_id": "cand_9254d3edae7924bc",
+          "contribution": 0.0,
+          "feature_name": "sql_error_pattern",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_9daab12b3a2ccbb0",
+          "observed": true,
+          "reason": "Observed new SQL error pattern raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_9254d3edae7924bc",
+          "contribution": 0.0,
+          "feature_name": "status_code_changed",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_9daab12b3a2ccbb0",
+          "observed": true,
+          "reason": "Observed status-code change raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        }
+      ],
+      "feature_vector_id": "fv_9daab12b3a2ccbb0",
+      "input_point_id": "inp_9fa3cda4a4d5fc17",
+      "rank": 6,
+      "raw_rank_score": 10.69767441860465,
+      "raw_rank_score_max": 75.0,
+      "scorer_version": "sqli-weighted-v1",
+      "selection_priority": 0.14263565891472868,
+      "vulnerability_type": "SQLI"
+    },
+    {
+      "candidate_id": "cand_94fad813cd3c3b9a",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_94fad813cd3c3b9a",
+          "contribution": 0.0,
+          "feature_name": "marker_reflected",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_41654dbefb99f777",
+          "observed": true,
+          "reason": "Observed new marker reflection raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_94fad813cd3c3b9a",
+          "contribution": 0.0,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_41654dbefb99f777",
+          "observed": true,
+          "reason": "Observed response-length difference raises Reflected XSS verification priority.",
+          "vulnerability_type": "REFLECTED_XSS",
+          "weight": 10.0
+        }
+      ],
+      "feature_vector_id": "fv_41654dbefb99f777",
+      "input_point_id": "inp_6e280419696d6e68",
+      "rank": 7,
+      "raw_rank_score": 0.0,
+      "raw_rank_score_max": 45.0,
+      "scorer_version": "reflected-xss-weighted-v1",
+      "selection_priority": 0.0,
+      "vulnerability_type": "REFLECTED_XSS"
+    },
+    {
+      "candidate_id": "cand_ba118a7d272951e9",
+      "category": "INJECTION",
+      "evidence": [
+        {
+          "candidate_id": "cand_ba118a7d272951e9",
+          "contribution": 0.0,
+          "feature_name": "response_length_diff_ratio",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_41654dbefb99f777",
+          "observed": true,
+          "reason": "Observed response-length difference raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        },
+        {
+          "candidate_id": "cand_ba118a7d272951e9",
+          "contribution": 0.0,
+          "feature_name": "sql_error_pattern",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_41654dbefb99f777",
+          "observed": true,
+          "reason": "Observed new SQL error pattern raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 35.0
+        },
+        {
+          "candidate_id": "cand_ba118a7d272951e9",
+          "contribution": 0.0,
+          "feature_name": "status_code_changed",
+          "feature_value": 0.0,
+          "feature_vector_id": "fv_41654dbefb99f777",
+          "observed": true,
+          "reason": "Observed status-code change raises SQLi verification priority.",
+          "vulnerability_type": "SQLI",
+          "weight": 20.0
+        }
+      ],
+      "feature_vector_id": "fv_41654dbefb99f777",
+      "input_point_id": "inp_6e280419696d6e68",
+      "rank": 8,
+      "raw_rank_score": 0.0,
+      "raw_rank_score_max": 75.0,
+      "scorer_version": "sqli-weighted-v1",
+      "selection_priority": 0.0,
+      "vulnerability_type": "SQLI"
+    }
+  ],
+  "categories": [
+    "SQLI",
+    "REFLECTED_XSS",
+    "BROKEN_ACCESS_CONTROL"
+  ],
+  "ranking_policy": {
+    "selection_key": "rank_score / exact_scorer_maximum",
+    "tie_breaker": "candidate_id ascending"
+  },
+  "schema_version": "0.1",
+  "summary": {
+    "rankable_results": 8,
+    "selected_results": 8,
+    "top_k_requested": 10,
+    "total_scoring_results": 8,
+    "unrankable_results": 0
+  },
+  "warnings": []
+}

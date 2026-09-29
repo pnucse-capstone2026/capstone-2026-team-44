@@ -1,0 +1,23 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Packaging / setuptools build artifacts
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local LLM model binaries (see models/README.md) — large, not committed
+models/*.gguf
+models/*.whl
+models/*.bin
+models/.cache/
+models/*.log

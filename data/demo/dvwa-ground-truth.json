@@ -1,0 +1,70 @@
+{
+  "schema_version": "ground-truth-v1",
+  "application_id": "dvwa",
+  "_note": "DVWA (security=low) 정답 초안. 팀장 지정 3개 페이지(SQLi/XSS-R/BAC)의 주입 가능한 GET 입력점만 라벨. VulnSpider는 입력점마다 SQLI/REFLECTED_XSS 후보를 만들고, 숫자 seed에는 BROKEN_ACCESS_CONTROL 후보도 만들므로 그 조합에 맞춰 라벨한다. 실제 스캔으로 발견/동작을 확인한 뒤 값을 확정할 것.",
+  "entries": [
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/sqli/",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/sqli/",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/xss_r/",
+      "parameter_location": "QUERY",
+      "parameter_name": "name",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/xss_r/",
+      "parameter_location": "QUERY",
+      "parameter_name": "name",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/bac/",
+      "parameter_location": "QUERY",
+      "parameter_name": "user_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/bac/",
+      "parameter_location": "QUERY",
+      "parameter_name": "user_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "dvwa",
+      "method": "GET",
+      "canonical_path": "/vulnerabilities/bac/",
+      "parameter_location": "QUERY",
+      "parameter_name": "user_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    }
+  ]
+}

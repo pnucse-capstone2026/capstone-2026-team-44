@@ -1,0 +1,98 @@
+{
+  "input_points": {
+    "inp_d4dd485c03213a20": {
+      "method": "GET",
+      "url": "http://127.0.0.1:8899/product?id=42",
+      "parameter_name": "id",
+      "parameter_location": "query",
+      "parameter_occurrence": 0,
+      "original_value": "42",
+      "body": null
+    },
+    "inp_9fa3cda4a4d5fc17": {
+      "method": "GET",
+      "url": "http://127.0.0.1:8899/search?q=book",
+      "parameter_name": "q",
+      "parameter_location": "query",
+      "parameter_occurrence": 0,
+      "original_value": "book",
+      "body": null
+    },
+    "inp_6e280419696d6e68": {
+      "method": "GET",
+      "url": "http://127.0.0.1:8899/account?tab=overview",
+      "parameter_name": "tab",
+      "parameter_location": "query",
+      "parameter_occurrence": 0,
+      "original_value": "overview",
+      "body": null
+    }
+  },
+  "endpoints": {
+    "ep_322fc24f988637e8": {
+      "method": "GET",
+      "url": "http://127.0.0.1:8899/product?id=42",
+      "parameter_name": "id",
+      "parameter_location": "query",
+      "parameter_occurrence": 0,
+      "original_value": "42",
+      "body": null,
+      "baseline_auth_context_id": "user_a",
+      "resources": [
+        {
+          "value": "42",
+          "owner_context_id": "user_a"
+        },
+        {
+          "value": "43",
+          "owner_context_id": "user_b"
+        }
+      ],
+      "auth_contexts": [
+        {
+          "context_id": "user_a",
+          "role": "user",
+          "is_anonymous": false
+        },
+        {
+          "context_id": "user_b",
+          "role": "user",
+          "is_anonymous": false
+        },
+        {
+          "context_id": "admin",
+          "role": "admin",
+          "is_anonymous": false
+        }
+      ]
+    },
+    "ep_68c3b8da39dc4ca1": {
+      "method": "GET",
+      "url": "http://127.0.0.1:8899/account?tab=overview",
+      "parameter_name": "tab",
+      "parameter_location": "query",
+      "parameter_occurrence": 0,
+      "original_value": "overview",
+      "body": null,
+      "baseline_auth_context_id": "authenticated_user",
+      "resources": [],
+      "auth_contexts": [
+        {
+          "context_id": "authenticated_user",
+          "role": "user",
+          "is_anonymous": false
+        },
+        {
+          "context_id": "anonymous",
+          "role": "anonymous",
+          "is_anonymous": true
+        },
+        {
+          "context_id": "admin",
+          "role": "admin",
+          "is_anonymous": false
+        }
+      ]
+    }
+  }
+}

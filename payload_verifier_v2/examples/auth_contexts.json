@@ -1,0 +1,18 @@
+{
+  "user_a": {
+    "headers": {"Authorization": "Bearer REPLACE_USER_A_TOKEN"},
+    "cookies": {}
+  },
+  "user_b": {
+    "headers": {"Authorization": "Bearer REPLACE_USER_B_TOKEN"},
+    "cookies": {}
+  },
+  "authenticated_user": {
+    "headers": {},
+    "cookies": {"session": "REPLACE_SESSION_COOKIE"}
+  },
+  "admin": {
+    "headers": {"Authorization": "Bearer REPLACE_ADMIN_TOKEN"},
+    "cookies": {}
+  }
+}

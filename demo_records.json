@@ -1,0 +1,20 @@
+[
+  {
+    "link": "http://127.0.0.1:8899/product?id=42",
+    "parent": "http://127.0.0.1:8899/",
+    "depth": 1,
+    "host": "127.0.0.1:8899",
+    "query_params": "{\"id\":\"42\"}",
+    "input_fields": "[]",
+    "source": "manual_demo"
+  },
+  {
+    "link": "http://127.0.0.1:8899/search?q=book",
+    "parent": "http://127.0.0.1:8899/",
+    "depth": 1,
+    "host": "127.0.0.1:8899",
+    "query_params": "{\"q\":\"book\"}",
+    "input_fields": "[]",
+    "source": "manual_demo"
+  }
+]

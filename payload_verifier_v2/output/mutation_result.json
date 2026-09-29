@@ -1,0 +1,447 @@
+{
+  "schema_version": "0.1",
+  "top_k": 4,
+  "records": [
+    {
+      "candidate_id": "acand_50fd39bd4724d812",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "status": "generated",
+      "model": "my-hacker-ai-3b-4096",
+      "payloads": [
+        {
+          "kind": "authorization_control",
+          "value": "42",
+          "operation": "keep_original",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "user_a",
+          "rationale": "Baseline access. Reads resource '42' as 'user_a'.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_a",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_a",
+            "credentials_mode": "use_context"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "42",
+          "operation": "change_auth_context",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "user_b",
+          "rationale": "Admin access. Reads resource '42' as 'user_b'.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_a",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_b",
+            "credentials_mode": "use_context"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "42",
+          "operation": "change_auth_context",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "admin",
+          "rationale": "User access. Reads resource '42' as 'admin'.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_a",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "admin",
+            "credentials_mode": "use_context"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "42",
+          "operation": "change_auth_context",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "Anonymous access. Reads resource '42' without auth.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": "user_a",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "use_context"
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "candidate_id": "acand_59d69bfb131e7677",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "status": "generated",
+      "model": "my-hacker-ai-3b-4096",
+      "payloads": [
+        {
+          "kind": "authorization_control",
+          "value": "overview",
+          "operation": "keep_original",
+          "target": {
+            "location": "credentials",
+            "parameter_name": null,
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "authenticated_user",
+          "rationale": "Baseline access. Verify the resource is accessible with the baseline auth context.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "authenticated_user",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "authenticated_user",
+            "credentials_mode": "use_context"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "overview",
+          "operation": "remove_credentials",
+          "target": {
+            "location": "credentials",
+            "parameter_name": null,
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "anonymous",
+          "rationale": "Anonymous access. Verify the resource is accessible without credentials.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "authenticated_user",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "omit"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "overview",
+          "operation": "change_auth_context",
+          "target": {
+            "location": "credentials",
+            "parameter_name": null,
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": "admin",
+          "rationale": "Admin access. Verify the resource is accessible with admin credentials.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "authenticated_user",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "admin",
+            "credentials_mode": "use_context"
+          }
+        },
+        {
+          "kind": "authorization_variant",
+          "value": "overview",
+          "operation": "remove_credentials",
+          "target": {
+            "location": "credentials",
+            "parameter_name": null,
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "Baseline access with modified parameter. Verify the resource is still accessible.",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": "authenticated_user",
+            "credentials_mode": "use_context"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/account?tab=overview",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "omit"
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "candidate_id": "cand_404bdc9da19de1ee",
+      "vulnerability_type": "SQLI",
+      "status": "generated",
+      "model": "my-hacker-ai-3b-4096",
+      "payloads": [
+        {
+          "kind": "true_condition",
+          "value": "1000",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "REPLACES_ORIGINAL_WITH_DIFFERENT_VALID_NUMBER",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=1000",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        },
+        {
+          "kind": "true_condition",
+          "value": "42||ASCII(REVERSE(SUBSTRING((SELECT(CAST('x' AS BINARY) FROM (VALUES(1)) LIMIT 1)),1,1)))=114",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "COMPLEX_BENIGN_BOOLEAN_LOGIC",
+          "expected_signal": "404 NOT FOUND",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42%7C%7CASCII%28REVERSE%28SUBSTRING%28%28SELECT%28CAST%28%27x%27+AS+BINARY%29+FROM+%28VALUES%281%29%29+LIMIT+1%29%29%2C1%2C1%29%29%29%3D114",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        },
+        {
+          "kind": "false_condition",
+          "value": "invalid_id_string",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "REPLACES_ORIGINAL_WITH_INVALID_TEXT",
+          "expected_signal": "404 NOT FOUND",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=invalid_id_string",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        },
+        {
+          "kind": "false_condition",
+          "value": "42||IF(ABS(-1)=2,TRUE,FALSE)",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "COMPLEX_BENIGN_FALSE_LOGIC",
+          "expected_signal": "200 OK",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42%7C%7CIF%28ABS%28-1%29%3D2%2CTRUE%2CFALSE%29",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "candidate_id": "cand_84b05c14a9207160",
+      "vulnerability_type": "REFLECTED_XSS",
+      "status": "generated",
+      "model": "my-hacker-ai-3b-4096",
+      "payloads": [
+        {
+          "kind": "reflection_control",
+          "value": "<x-custom data-val='xss-proprobe'></x-custom>xss-probe",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "Baseline inert reflection control.",
+          "expected_signal": "404 Not Found",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=%3Cx-custom+data-val%3D%27xss-proprobe%27%3E%3C%2Fx-custom%3Exss-probe",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        },
+        {
+          "kind": "reflection_marker",
+          "value": "&lt;b&gt;xss-probe&lt;/b&gt;",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "Reflected text marker.",
+          "expected_signal": "Reflected exactly in <b>xss-probe</b>",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=%26lt%3Bb%26gt%3Bxss-probe%26lt%3B%2Fb%26gt%3B",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        },
+        {
+          "kind": "reflection_marker",
+          "value": "<div title='xss-probe'></div>",
+          "operation": "replace_parameter",
+          "target": {
+            "location": "query",
+            "parameter_name": "id",
+            "parameter_occurrence": 0
+          },
+          "auth_context_id": null,
+          "rationale": "Reflected inert element.",
+          "expected_signal": "Reflected exactly in <div title='xss-probe'></div>",
+          "baseline_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=42",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          },
+          "mutated_request": {
+            "method": "GET",
+            "url": "http://127.0.0.1:8899/product?id=%3Cdiv+title%3D%27xss-probe%27%3E%3C%2Fdiv%3E",
+            "body": null,
+            "auth_context_id": null,
+            "credentials_mode": "preserve"
+          }
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}

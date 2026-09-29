@@ -1,0 +1,3049 @@
+{
+  "report_version": "verification-report-v1",
+  "contract_version": "0.1",
+  "target": "http://127.0.0.1:8899/portal/",
+  "counts": {
+    "candidates_verified": 6,
+    "proposals": 24,
+    "accepted": 24,
+    "rejected": 0,
+    "executed": 24,
+    "supported": 0,
+    "weakened": 6,
+    "inconclusive_error": 0,
+    "unchanged": 18
+  },
+  "warnings": [],
+  "candidates": [
+    {
+      "candidate_id": "cand_a44e9b65c96aa368",
+      "input_point_id": "inp_f9da04f7fc402cb9",
+      "vulnerability_type": "SQLI",
+      "selection_rank": 1,
+      "prior_probability": 0.5495428634774664,
+      "final_outcome": "UNCHANGED",
+      "final_signal": "UNCHANGED",
+      "final_confidence": 0.44809769536022176,
+      "confidence_delta": -0.10144516811724463,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_93472101b3a3aaa9",
+          "candidate_id": "cand_a44e9b65c96aa368",
+          "selection_rank": 1,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_62a208ee3fe9b903",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_A3F123BA83D7D649'",
+          "based_on_value": "5001",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_db77d0decb9da308"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_741cfab182c74976",
+            "baseline_response_id": "resp_6189cb154ef3ab5f",
+            "probe_response_id": "resp_cf106977761b2a2b",
+            "verification_feature_vector_id": "fv_81e253e8676a2fbb",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_81e253e8676a2fbb",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.003706645485835318,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03640455387873974,
+                "verification_observed": true,
+                "delta": 0.003706645485835318,
+                "abs_delta": 0.003706645485835318,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.5495428634774664,
+            "verification_confidence": 0.44809769536022176,
+            "confidence_delta": -0.10144516811724463,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.03640455387873974,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_333015f525b3032a",
+          "candidate_id": "cand_a44e9b65c96aa368",
+          "selection_rank": 1,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_0af5d535807d6f5b",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_21E408CE878B4623\"",
+          "based_on_value": "5001",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_1bd93e229506918b"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_7b681535270f68c3",
+            "baseline_response_id": "resp_fb70dccf376c8eb0",
+            "probe_response_id": "resp_88c87b7e758c9ade",
+            "verification_feature_vector_id": "fv_d817c1908d85164b",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_d817c1908d85164b",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.003706645485835318,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03640455387873974,
+                "verification_observed": true,
+                "delta": 0.003706645485835318,
+                "abs_delta": 0.003706645485835318,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.5495428634774664,
+            "verification_confidence": 0.44809769536022176,
+            "confidence_delta": -0.10144516811724463,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.03640455387873974,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_cbc2ea8a68de6ee7",
+          "candidate_id": "cand_a44e9b65c96aa368",
+          "selection_rank": 1,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_ae4f37d5fd5ce7ac",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_AE5115AAFD9E91DC')",
+          "based_on_value": "5001",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_f24dd0f0d24c6354"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_0995cdc29c3396b3",
+            "baseline_response_id": "resp_233946720990a33d",
+            "probe_response_id": "resp_7804d632c6acc036",
+            "verification_feature_vector_id": "fv_45f99e9e2ba0f8a1",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_45f99e9e2ba0f8a1",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0035742652899126287,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03627217368281705,
+                "verification_observed": true,
+                "delta": 0.0035742652899126287,
+                "abs_delta": 0.0035742652899126287,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.5495428634774664,
+            "verification_confidence": 0.44809769536022176,
+            "confidence_delta": -0.10144516811724463,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.03627217368281705,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_b0080752db04e2a0",
+          "candidate_id": "cand_a44e9b65c96aa368",
+          "selection_rank": 1,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_656faf1a0d82c7a3",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "5001",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_7d2bab1af1453e81"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_9a1149733ff64f14",
+            "baseline_response_id": "resp_ed670698b34131cd",
+            "probe_response_id": "resp_da9426dda5092cef",
+            "verification_feature_vector_id": "fv_503f02d5a35b608f",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_503f02d5a35b608f",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.008339952343129467,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.04103786073603389,
+                "verification_observed": true,
+                "delta": 0.008339952343129467,
+                "abs_delta": 0.008339952343129467,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.5495428634774664,
+            "verification_confidence": 0.44809769536022176,
+            "confidence_delta": -0.10144516811724463,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.04103786073603389,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_b43142e5d01f35bf",
+      "input_point_id": "inp_2a7f011e22206b0e",
+      "vulnerability_type": "REFLECTED_XSS",
+      "selection_rank": 2,
+      "prior_probability": 0.4350699107535104,
+      "final_outcome": "WEAKENED",
+      "final_signal": "WEAKEN",
+      "final_confidence": 0.2207682043351422,
+      "confidence_delta": -0.21430170641836824,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_02d03de8152eb978",
+          "candidate_id": "cand_b43142e5d01f35bf",
+          "selection_rank": 2,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_ee526f5b7720fff0",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_2754CA42434FAE96Z<>\"'Z",
+          "based_on_value": "880",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_f7f83a742285b8b6"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_293f499706e3a942",
+            "baseline_response_id": "resp_04583c6696e01959",
+            "probe_response_id": "resp_5ff0f9b479611c84",
+            "verification_feature_vector_id": "fv_d53037557f8d77d5",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_d53037557f8d77d5",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": 0.6666666666666666,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.04261220373171962,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4350699107535104,
+            "verification_confidence": 0.2207682043351422,
+            "confidence_delta": -0.21430170641836824,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_1d03d3e07e531310",
+          "candidate_id": "cand_b43142e5d01f35bf",
+          "selection_rank": 2,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_1d7547b539ebf0a0",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_BA75366C2ABB9391Z<>\"'`/=()Z",
+          "based_on_value": "880",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_213286081c96d914"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_4a865a11cece7c03",
+            "baseline_response_id": "resp_b1a55f0cd9019830",
+            "probe_response_id": "resp_a2a8e9a9d3ed34a8",
+            "verification_feature_vector_id": "fv_3510583af05f7fde",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_3510583af05f7fde",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0012607160867372652,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": 0.6666666666666666,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.04387291981845688,
+                "verification_observed": true,
+                "delta": 0.0012607160867372652,
+                "abs_delta": 0.0012607160867372652,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4350699107535104,
+            "verification_confidence": 0.2207682043351422,
+            "confidence_delta": -0.21430170641836824,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_bd3c2977f32a996d",
+          "candidate_id": "cand_b43142e5d01f35bf",
+          "selection_rank": 2,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_b4620831e048c495",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "880",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_b0970cfdbf75d08f"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_8e4f4e5938fd097c",
+            "baseline_response_id": "resp_1c843e4c00ecba92",
+            "probe_response_id": "resp_7eabc861b87f7719",
+            "verification_feature_vector_id": "fv_c685cc782d0ecb82",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_c685cc782d0ecb82",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.011850731215330309,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.030761472516389308,
+                "verification_observed": true,
+                "delta": -0.011850731215330309,
+                "abs_delta": 0.011850731215330309,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4350699107535104,
+            "verification_confidence": 0.2207682043351422,
+            "confidence_delta": -0.21430170641836824,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.030761472516389308,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_2c3ae37569575eed",
+          "candidate_id": "cand_b43142e5d01f35bf",
+          "selection_rank": 2,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_9c656e2a9e18a4eb",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "2147483648",
+          "based_on_value": "880",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_ac8edcb9ac3a477d"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_0a92708e95c807cc",
+            "baseline_response_id": "resp_0ff8c63c46e0c9ea",
+            "probe_response_id": "resp_4b6e57b35dbd676c",
+            "verification_feature_vector_id": "fv_88c2b915644cdf07",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_88c2b915644cdf07",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.00983358547655068,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.03277861825516894,
+                "verification_observed": true,
+                "delta": -0.00983358547655068,
+                "abs_delta": 0.00983358547655068,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4350699107535104,
+            "verification_confidence": 0.2207682043351422,
+            "confidence_delta": -0.21430170641836824,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.03277861825516894,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_6a59e6cdc7dd5cd1",
+      "input_point_id": "inp_72bb13a27801ec9d",
+      "vulnerability_type": "REFLECTED_XSS",
+      "selection_rank": 3,
+      "prior_probability": 0.4345978569354425,
+      "final_outcome": "WEAKENED",
+      "final_signal": "WEAKEN",
+      "final_confidence": 0.22043793957534602,
+      "confidence_delta": -0.21415991736009649,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_f1ab66461d6311f7",
+          "candidate_id": "cand_6a59e6cdc7dd5cd1",
+          "selection_rank": 3,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_80a20e1ad851fb9b",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_280D4F8F93898748Z<>\"'Z",
+          "based_on_value": "4100",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_4c676ea33ed82191"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_c3aee68b3bf35465",
+            "baseline_response_id": "resp_1686dec7cacb16f7",
+            "probe_response_id": "resp_0e7ab8206c6f40ec",
+            "verification_feature_vector_id": "fv_7b7d6c3ea5a629b7",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_7b7d6c3ea5a629b7",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": 0.6666666666666666,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.03876704208654416,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4345978569354425,
+            "verification_confidence": 0.22043793957534602,
+            "confidence_delta": -0.21415991736009649,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_327ec64de098d7f6",
+          "candidate_id": "cand_6a59e6cdc7dd5cd1",
+          "selection_rank": 3,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_a3b3a67f5b50ee01",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_7D3CA77688BA3B00Z<>\"'`/=()Z",
+          "based_on_value": "4100",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_e30d4a4c1848e639"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_f7421f989722c94f",
+            "baseline_response_id": "resp_57b3400d54d1d601",
+            "probe_response_id": "resp_4871b9b8187c6921",
+            "verification_feature_vector_id": "fv_704bc6c3cd2a6235",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_704bc6c3cd2a6235",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0011855364552459946,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": 0.6666666666666666,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.03995257854179016,
+                "verification_observed": true,
+                "delta": 0.0011855364552459946,
+                "abs_delta": 0.0011855364552459946,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4345978569354425,
+            "verification_confidence": 0.22043793957534602,
+            "confidence_delta": -0.21415991736009649,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_311aa81969cb60fb",
+          "candidate_id": "cand_6a59e6cdc7dd5cd1",
+          "selection_rank": 3,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_172ddfa2cf5281e7",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "4100",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_65b4c522cc5beef2"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_c80dafc211867a7f",
+            "baseline_response_id": "resp_6d3809558a9e2f6c",
+            "probe_response_id": "resp_ae505d5d2c39a461",
+            "verification_feature_vector_id": "fv_6833ccb6597172aa",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_6833ccb6597172aa",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.011144042679312391,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.02762299940723177,
+                "verification_observed": true,
+                "delta": -0.011144042679312391,
+                "abs_delta": 0.011144042679312391,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4345978569354425,
+            "verification_confidence": 0.22043793957534602,
+            "confidence_delta": -0.21415991736009649,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.02762299940723177,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_bcda5c6313c57de0",
+          "candidate_id": "cand_6a59e6cdc7dd5cd1",
+          "selection_rank": 3,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_05c7b584b178a3a3",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "2147483648",
+          "based_on_value": "4100",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_4a74899ca41bf424"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_3a39806806fda2a7",
+            "baseline_response_id": "resp_1cb870c33a5e2023",
+            "probe_response_id": "resp_b47ac60cd115748c",
+            "verification_feature_vector_id": "fv_2071346ef8080961",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_2071346ef8080961",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.009247184350918793,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.02951985773562537,
+                "verification_observed": true,
+                "delta": -0.009247184350918793,
+                "abs_delta": 0.009247184350918793,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.4345978569354425,
+            "verification_confidence": 0.22043793957534602,
+            "confidence_delta": -0.21415991736009649,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.02951985773562537,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_170106dd1622a036",
+      "input_point_id": "inp_f9da04f7fc402cb9",
+      "vulnerability_type": "REFLECTED_XSS",
+      "selection_rank": 4,
+      "prior_probability": 0.3897086168385822,
+      "final_outcome": "WEAKENED",
+      "final_signal": "WEAKEN",
+      "final_confidence": 0.1902267949320608,
+      "confidence_delta": -0.19948182190652142,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_e8f1046665bc0984",
+          "candidate_id": "cand_170106dd1622a036",
+          "selection_rank": 4,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_ee265b0d0e04bd3e",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_B314F692540C698BZ<>\"'Z",
+          "based_on_value": "5001",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_2c157cc655743baf"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_ed6d20da512cc167",
+            "baseline_response_id": "resp_b343d9084ae49a68",
+            "probe_response_id": "resp_9702f53be227f540",
+            "verification_feature_vector_id": "fv_3a31dd8b6349578d",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_3a31dd8b6349578d",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": 0.3333333333333333,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03269790839290442,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.3897086168385822,
+            "verification_confidence": 0.1902267949320608,
+            "confidence_delta": -0.19948182190652142,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_23d9346d6709de04",
+          "candidate_id": "cand_170106dd1622a036",
+          "selection_rank": 4,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_5bb99c84638d648f",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "HTML_SENTINEL",
+          "mutated_value": "VULNSPIDER_9E259A9F288D3DD2Z<>\"'`/=()Z",
+          "based_on_value": "5001",
+          "rationale": "Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_5dc4f4158ec31922"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_30ec6cbb1ae98e81",
+            "baseline_response_id": "resp_7f5eb1bf9c41b9f1",
+            "probe_response_id": "resp_9c65cd27f405d9e7",
+            "verification_feature_vector_id": "fv_e10480d86dc3fbb2",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_e10480d86dc3fbb2",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0006619009796134528,
+            "changed": false,
+            "observability_flips": [],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": 0.3333333333333333,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03203600741329097,
+                "verification_observed": true,
+                "delta": -0.0006619009796134528,
+                "abs_delta": 0.0006619009796134528,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "WEAKENED",
+            "signal": "WEAKEN",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.3897086168385822,
+            "verification_confidence": 0.1902267949320608,
+            "confidence_delta": -0.19948182190652142,
+            "evidence": [
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "verification_value": 1.0,
+                "direction": "up",
+                "reason": "The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered."
+              }
+            ]
+          },
+          "outcome_status": "WEAKENED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_07bf998f064953a8",
+          "candidate_id": "cand_170106dd1622a036",
+          "selection_rank": 4,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_9cbd3471b3be53ba",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "5001",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_6f35a0cc5bcae237"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_9a1149733ff64f14",
+            "baseline_response_id": "resp_ed670698b34131cd",
+            "probe_response_id": "resp_da9426dda5092cef",
+            "verification_feature_vector_id": "fv_503f02d5a35b608f",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_503f02d5a35b608f",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.008339952343129467,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.04103786073603389,
+                "verification_observed": true,
+                "delta": 0.008339952343129467,
+                "abs_delta": 0.008339952343129467,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.3897086168385822,
+            "verification_confidence": 0.1902267949320608,
+            "confidence_delta": -0.19948182190652142,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.04103786073603389,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_ed8f3f6a8b6d09d6",
+          "candidate_id": "cand_170106dd1622a036",
+          "selection_rank": 4,
+          "vulnerability_type": "REFLECTED_XSS",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_9d4551514d717e52",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "2147483648",
+          "based_on_value": "5001",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_a7c47a345df44cfb"
+          },
+          "baseline_feature_vector_id": "fv_2ac8cc17738af50a",
+          "execution": {
+            "probe_plan_id": "probe_31de2abd234bea2c",
+            "baseline_response_id": "resp_c48b5ef50233e899",
+            "probe_response_id": "resp_bfc7fdd4bafeca01",
+            "verification_feature_vector_id": "fv_789ecc1276d994e7",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_f9da04f7fc402cb9",
+            "verification_feature_vector_id": "fv_789ecc1276d994e7",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.007280910775747947,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.3333333333333333,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "baseline_observed": true,
+                "verification_value": 0.03997881916865237,
+                "verification_observed": true,
+                "delta": 0.007280910775747947,
+                "abs_delta": 0.007280910775747947,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": 1.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.3897086168385822,
+            "verification_confidence": 0.1902267949320608,
+            "confidence_delta": -0.19948182190652142,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03269790839290442,
+                "verification_value": 0.03997881916865237,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_a22cd77eec74f0d6",
+      "input_point_id": "inp_2a7f011e22206b0e",
+      "vulnerability_type": "SQLI",
+      "selection_rank": 5,
+      "prior_probability": 0.23124784011850535,
+      "final_outcome": "UNCHANGED",
+      "final_signal": "UNCHANGED",
+      "final_confidence": 0.16680222507338227,
+      "confidence_delta": -0.06444561504512308,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_be368c093a411c03",
+          "candidate_id": "cand_a22cd77eec74f0d6",
+          "selection_rank": 5,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_1720dad435b72d30",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_365ED13107BEF369'",
+          "based_on_value": "880",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_b435d136ed08cf17"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_8c642dcfdaa413f4",
+            "baseline_response_id": "resp_3f77a0524d455631",
+            "probe_response_id": "resp_c4ab2a449f15b3ce",
+            "verification_feature_vector_id": "fv_834d33e12ff1e72b",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_834d33e12ff1e72b",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0040342914775592514,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.038577912254160365,
+                "verification_observed": true,
+                "delta": -0.0040342914775592514,
+                "abs_delta": 0.0040342914775592514,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.23124784011850535,
+            "verification_confidence": 0.16680222507338227,
+            "confidence_delta": -0.06444561504512308,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.038577912254160365,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_0505d77c78c2d0b3",
+          "candidate_id": "cand_a22cd77eec74f0d6",
+          "selection_rank": 5,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_5f3532fd37e5ce55",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_CBC5D0C60DB8F896\"",
+          "based_on_value": "880",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_0348777599b4ac89"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_b313d719f2e8b773",
+            "baseline_response_id": "resp_6d96e14fec94ca07",
+            "probe_response_id": "resp_0dda8fa918008b20",
+            "verification_feature_vector_id": "fv_eacb17cd4fbdb673",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_eacb17cd4fbdb673",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0040342914775592514,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.038577912254160365,
+                "verification_observed": true,
+                "delta": -0.0040342914775592514,
+                "abs_delta": 0.0040342914775592514,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.23124784011850535,
+            "verification_confidence": 0.16680222507338227,
+            "confidence_delta": -0.06444561504512308,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.038577912254160365,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_ee7b289a81c9f7bb",
+          "candidate_id": "cand_a22cd77eec74f0d6",
+          "selection_rank": 5,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_192f808dd066eef6",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_08AC8F8B229ACDCB')",
+          "based_on_value": "880",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_ff38c8e91b5c8c4f"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_ae9f38a389909766",
+            "baseline_response_id": "resp_550ef538af0498c5",
+            "probe_response_id": "resp_3d6f274ef40ed649",
+            "verification_feature_vector_id": "fv_03d5309d85652a86",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_03d5309d85652a86",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0037821482602118026,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.038830055471507814,
+                "verification_observed": true,
+                "delta": -0.0037821482602118026,
+                "abs_delta": 0.0037821482602118026,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.23124784011850535,
+            "verification_confidence": 0.16680222507338227,
+            "confidence_delta": -0.06444561504512308,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.038830055471507814,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_a88dc0e75df3bf12",
+          "candidate_id": "cand_a22cd77eec74f0d6",
+          "selection_rank": 5,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_9f962897867e3f24",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "880",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_9b7f84ccd49a5858"
+          },
+          "baseline_feature_vector_id": "fv_9a7fd0c4bf61f339",
+          "execution": {
+            "probe_plan_id": "probe_8e4f4e5938fd097c",
+            "baseline_response_id": "resp_1c843e4c00ecba92",
+            "probe_response_id": "resp_7eabc861b87f7719",
+            "verification_feature_vector_id": "fv_c685cc782d0ecb82",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_2a7f011e22206b0e",
+            "verification_feature_vector_id": "fv_c685cc782d0ecb82",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.011850731215330309,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "baseline_observed": true,
+                "verification_value": 0.030761472516389308,
+                "verification_observed": true,
+                "delta": -0.011850731215330309,
+                "abs_delta": 0.011850731215330309,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.23124784011850535,
+            "verification_confidence": 0.16680222507338227,
+            "confidence_delta": -0.06444561504512308,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.04261220373171962,
+                "verification_value": 0.030761472516389308,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "cand_04c23c90c4132562",
+      "input_point_id": "inp_72bb13a27801ec9d",
+      "vulnerability_type": "SQLI",
+      "selection_rank": 6,
+      "prior_probability": 0.2302379429285601,
+      "final_outcome": "UNCHANGED",
+      "final_signal": "UNCHANGED",
+      "final_confidence": 0.16601299413369316,
+      "confidence_delta": -0.06422494879486693,
+      "results": [
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_57d4ba0a00a1a032",
+          "candidate_id": "cand_04c23c90c4132562",
+          "selection_rank": 6,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_ca943eb324163af1",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_458B65368F9C3BDD'",
+          "based_on_value": "4100",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_1860165ee1ac59f8"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_da045d6e453cc043",
+            "baseline_response_id": "resp_697a1e282024705e",
+            "probe_response_id": "resp_2dcc7541d3a48196",
+            "verification_feature_vector_id": "fv_9868c7bd0899fb60",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_9868c7bd0899fb60",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0037937166567871966,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.034973325429756966,
+                "verification_observed": true,
+                "delta": -0.0037937166567871966,
+                "abs_delta": 0.0037937166567871966,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.2302379429285601,
+            "verification_confidence": 0.16601299413369316,
+            "confidence_delta": -0.06422494879486693,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.034973325429756966,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_d2e3728d560c5edf",
+          "candidate_id": "cand_04c23c90c4132562",
+          "selection_rank": 6,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_17c51ea4fff2947b",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_914C9037AD04F9E2\"",
+          "based_on_value": "4100",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_951b22c5b211af3d"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_1da1c6e44cf4599b",
+            "baseline_response_id": "resp_ed4cc48a5da371d8",
+            "probe_response_id": "resp_dc15a57e8ed17ed5",
+            "verification_feature_vector_id": "fv_c133bdd2b90f311d",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_c133bdd2b90f311d",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0037937166567871966,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.034973325429756966,
+                "verification_observed": true,
+                "delta": -0.0037937166567871966,
+                "abs_delta": 0.0037937166567871966,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.2302379429285601,
+            "verification_confidence": 0.16601299413369316,
+            "confidence_delta": -0.06422494879486693,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.034973325429756966,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_c9c24fc7d541b32c",
+          "candidate_id": "cand_04c23c90c4132562",
+          "selection_rank": 6,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_071f75782443b8f0",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "SQL_META",
+          "mutated_value": "VULNSPIDER_F0DEE682E0A935E4')",
+          "based_on_value": "4100",
+          "rationale": "Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_1827e278f5ec1107"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_600c3feb70be3839",
+            "baseline_response_id": "resp_2860f0422fc55aef",
+            "probe_response_id": "resp_673187be0d87acb2",
+            "verification_feature_vector_id": "fv_814062c2cf16d5cf",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_814062c2cf16d5cf",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.0035566093657379977,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.035210432720806165,
+                "verification_observed": true,
+                "delta": -0.0035566093657379977,
+                "abs_delta": 0.0035566093657379977,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.2302379429285601,
+            "verification_confidence": 0.16601299413369316,
+            "confidence_delta": -0.06422494879486693,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.035210432720806165,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        },
+        {
+          "contract_version": "0.1",
+          "verification_result_id": "vres_edab67600dd776de",
+          "candidate_id": "cand_04c23c90c4132562",
+          "selection_rank": 6,
+          "vulnerability_type": "SQLI",
+          "provider": "deterministic-baseline",
+          "proposal_id": "prop_7fdae752c6dc6cd3",
+          "proposer_version": "deterministic-mutation-v1",
+          "mutation_family": "BOUNDARY",
+          "mutated_value": "-1",
+          "based_on_value": "4100",
+          "rationale": "Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.",
+          "validator": {
+            "policy_version": "payload-validator-v1",
+            "decision": "ACCEPTED",
+            "rejection_reasons": [],
+            "validated_payload_id": "vpl_5e81474820379ca4"
+          },
+          "baseline_feature_vector_id": "fv_300b97e29ab0b08e",
+          "execution": {
+            "probe_plan_id": "probe_c80dafc211867a7f",
+            "baseline_response_id": "resp_6d3809558a9e2f6c",
+            "probe_response_id": "resp_ae505d5d2c39a461",
+            "verification_feature_vector_id": "fv_6833ccb6597172aa",
+            "baseline_execution_error": null,
+            "probe_execution_error": null
+          },
+          "feature_delta": {
+            "input_point_id": "inp_72bb13a27801ec9d",
+            "verification_feature_vector_id": "fv_6833ccb6597172aa",
+            "material_delta_threshold": 0.3,
+            "max_abs_delta": 0.011144042679312391,
+            "changed": true,
+            "observability_flips": [
+              "marker_reflected",
+              "reflection_count_norm",
+              "safe_html_encoding_detected"
+            ],
+            "features": [
+              {
+                "feature_name": "marker_reflected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "reflection_count_norm",
+                "baseline_value": 0.6666666666666666,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "baseline_observed": true,
+                "verification_value": 0.02762299940723177,
+                "verification_observed": true,
+                "delta": -0.011144042679312391,
+                "abs_delta": 0.011144042679312391,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "safe_html_encoding_detected",
+                "baseline_value": 1.0,
+                "baseline_observed": true,
+                "verification_value": null,
+                "verification_observed": false,
+                "delta": null,
+                "abs_delta": null,
+                "observability_flip": true
+              },
+              {
+                "feature_name": "sql_error_pattern",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              },
+              {
+                "feature_name": "status_code_changed",
+                "baseline_value": 0.0,
+                "baseline_observed": true,
+                "verification_value": 0.0,
+                "verification_observed": true,
+                "delta": 0.0,
+                "abs_delta": 0.0,
+                "observability_flip": false
+              }
+            ]
+          },
+          "confidence": {
+            "rule_version": "confidence-rule-v2",
+            "scale": "probability-0-1-v1",
+            "outcome": "UNCHANGED",
+            "signal": "UNCHANGED",
+            "model_version": "verification-confidence-model-v1",
+            "prior_probability": 0.2302379429285601,
+            "verification_confidence": 0.16601299413369316,
+            "confidence_delta": -0.06422494879486693,
+            "evidence": [
+              {
+                "feature_name": "response_length_diff_ratio",
+                "baseline_value": 0.03876704208654416,
+                "verification_value": 0.02762299940723177,
+                "direction": "flat",
+                "reason": "The re-probe barely moved the feature vector; the prior confidence is kept."
+              }
+            ]
+          },
+          "outcome_status": "UNCHANGED",
+          "warnings": []
+        }
+      ]
+    }
+  ]
+}

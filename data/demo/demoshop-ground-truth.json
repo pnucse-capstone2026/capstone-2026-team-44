@@ -1,0 +1,2193 @@
+{
+  "schema_version": "ground-truth-v1",
+  "application_id": "demoshop",
+  "entries": [
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "min_price",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "min_price",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "min_price",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "max_price",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "max_price",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "max_price",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "brand",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "brand",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "color",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "color",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "size",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "size",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/catalog",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "variant",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "variant",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "tab",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "tab",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/reviews",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "answered",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/product/qna",
+      "parameter_location": "QUERY",
+      "parameter_name": "answered",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "title",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "title",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "body",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "body",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "rating",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/review/new",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "item_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "item_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "item_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "qty",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "coupon",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "coupon",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "note",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/cart",
+      "parameter_location": "QUERY",
+      "parameter_name": "note",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_ref",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_ref",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "shipping",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "shipping",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "payment",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "payment",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "message",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "message",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/checkout",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "status",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "status",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "from_date",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "from_date",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "to_date",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "to_date",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/track",
+      "parameter_location": "QUERY",
+      "parameter_name": "tracking_no",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/track",
+      "parameter_location": "QUERY",
+      "parameter_name": "tracking_no",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/track",
+      "parameter_location": "QUERY",
+      "parameter_name": "tracking_no",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/track",
+      "parameter_location": "QUERY",
+      "parameter_name": "carrier",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/track",
+      "parameter_location": "QUERY",
+      "parameter_name": "carrier",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/invoice",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/invoice",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/invoice",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/invoice",
+      "parameter_location": "QUERY",
+      "parameter_name": "format",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/order/invoice",
+      "parameter_location": "QUERY",
+      "parameter_name": "format",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "username",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "username",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "return_to",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "return_to",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "next",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/login",
+      "parameter_location": "QUERY",
+      "parameter_name": "next",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "bio",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "bio",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "view",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/profile",
+      "parameter_location": "QUERY",
+      "parameter_name": "view",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "address_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "address_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "address_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "zipcode",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "city",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "city",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "street",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/address",
+      "parameter_location": "QUERY",
+      "parameter_name": "street",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/wishlist",
+      "parameter_location": "QUERY",
+      "parameter_name": "page",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/points",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/points",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/points",
+      "parameter_location": "QUERY",
+      "parameter_name": "uid",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/points",
+      "parameter_location": "QUERY",
+      "parameter_name": "period",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/account/points",
+      "parameter_location": "QUERY",
+      "parameter_name": "period",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "ticket_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "ticket_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "ticket_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "subject",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "subject",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "message",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "message",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/ticket",
+      "parameter_location": "QUERY",
+      "parameter_name": "category",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/faq",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/faq",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/faq",
+      "parameter_location": "QUERY",
+      "parameter_name": "topic",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/faq",
+      "parameter_location": "QUERY",
+      "parameter_name": "topic",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/chat",
+      "parameter_location": "QUERY",
+      "parameter_name": "room",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/chat",
+      "parameter_location": "QUERY",
+      "parameter_name": "room",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/chat",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/support/chat",
+      "parameter_location": "QUERY",
+      "parameter_name": "nickname",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "seller_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "seller_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "range",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "range",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "metric",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/dashboard",
+      "parameter_location": "QUERY",
+      "parameter_name": "metric",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "product_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "title",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "title",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "price",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "price",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "price",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "stock",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "stock",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/product/edit",
+      "parameter_location": "QUERY",
+      "parameter_name": "stock",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/settlement",
+      "parameter_location": "QUERY",
+      "parameter_name": "seller_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/settlement",
+      "parameter_location": "QUERY",
+      "parameter_name": "seller_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/settlement",
+      "parameter_location": "QUERY",
+      "parameter_name": "seller_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/settlement",
+      "parameter_location": "QUERY",
+      "parameter_name": "month",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/seller/settlement",
+      "parameter_location": "QUERY",
+      "parameter_name": "month",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/coupon",
+      "parameter_location": "QUERY",
+      "parameter_name": "code",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/coupon",
+      "parameter_location": "QUERY",
+      "parameter_name": "code",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/coupon",
+      "parameter_location": "QUERY",
+      "parameter_name": "campaign",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/coupon",
+      "parameter_location": "QUERY",
+      "parameter_name": "campaign",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "event_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "event_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "event_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "banner",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "banner",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "utm_source",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/promo/event",
+      "parameter_location": "QUERY",
+      "parameter_name": "utm_source",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/newsletter",
+      "parameter_location": "QUERY",
+      "parameter_name": "email",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/newsletter",
+      "parameter_location": "QUERY",
+      "parameter_name": "email",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/newsletter",
+      "parameter_location": "QUERY",
+      "parameter_name": "source",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/newsletter",
+      "parameter_location": "QUERY",
+      "parameter_name": "source",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "slug",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "slug",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "comment",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "comment",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/post",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/blog/search",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/compare",
+      "parameter_location": "QUERY",
+      "parameter_name": "ids",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/compare",
+      "parameter_location": "QUERY",
+      "parameter_name": "ids",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/compare",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/compare",
+      "parameter_location": "QUERY",
+      "parameter_name": "sort",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "zip",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "zip",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "zip",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "city",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "city",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "radius",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "radius",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/store/locator",
+      "parameter_location": "QUERY",
+      "parameter_name": "radius",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/api/suggest",
+      "parameter_location": "QUERY",
+      "parameter_name": "term",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/api/suggest",
+      "parameter_location": "QUERY",
+      "parameter_name": "term",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/api/suggest",
+      "parameter_location": "QUERY",
+      "parameter_name": "limit",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/api/suggest",
+      "parameter_location": "QUERY",
+      "parameter_name": "limit",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/api/suggest",
+      "parameter_location": "QUERY",
+      "parameter_name": "limit",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "role",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "role",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/users",
+      "parameter_location": "QUERY",
+      "parameter_name": "q",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "status",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/admin/orders",
+      "parameter_location": "QUERY",
+      "parameter_name": "status",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/order",
+      "parameter_location": "QUERY",
+      "parameter_name": "ref",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/order",
+      "parameter_location": "QUERY",
+      "parameter_name": "ref",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/order",
+      "parameter_location": "QUERY",
+      "parameter_name": "ref",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/message",
+      "parameter_location": "QUERY",
+      "parameter_name": "thread",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/message",
+      "parameter_location": "QUERY",
+      "parameter_name": "thread",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/message",
+      "parameter_location": "QUERY",
+      "parameter_name": "thread",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": true
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/card",
+      "parameter_location": "QUERY",
+      "parameter_name": "card_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/card",
+      "parameter_location": "QUERY",
+      "parameter_name": "card_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "demoshop",
+      "method": "GET",
+      "canonical_path": "/portal/card",
+      "parameter_location": "QUERY",
+      "parameter_name": "card_id",
+      "vulnerability_type": "BROKEN_ACCESS_CONTROL",
+      "vulnerable": false
+    }
+  ]
+}

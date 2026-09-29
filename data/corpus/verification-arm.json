@@ -1,0 +1,40 @@
+{
+  "samples": 146,
+  "positives": 36,
+  "groups": 14,
+  "brier_prior": 0.1362155396926766,
+  "brier_posterior": 0.10198335029061398,
+  "brier_improvement": 0.03423218940206263,
+  "signal_counts": [
+    {
+      "signal": "INCONCLUSIVE",
+      "vulnerable": 0,
+      "safe": 0
+    },
+    {
+      "signal": "NOT_EXECUTED",
+      "vulnerable": 0,
+      "safe": 0
+    },
+    {
+      "signal": "SUPPORT_NEW",
+      "vulnerable": 0,
+      "safe": 0
+    },
+    {
+      "signal": "SUPPORT_REPRODUCED",
+      "vulnerable": 20,
+      "safe": 0
+    },
+    {
+      "signal": "UNCHANGED",
+      "vulnerable": 16,
+      "safe": 90
+    },
+    {
+      "signal": "WEAKEN",
+      "vulnerable": 0,
+      "safe": 20
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": "ground-truth-v1",
+  "entries": [
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/category",
+      "parameter_location": "QUERY",
+      "parameter_name": "cat",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/category",
+      "parameter_location": "QUERY",
+      "parameter_name": "cat",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/order",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/order",
+      "parameter_location": "QUERY",
+      "parameter_name": "order_id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/product",
+      "parameter_location": "QUERY",
+      "parameter_name": "id",
+      "vulnerability_type": "SQLI",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/review",
+      "parameter_location": "QUERY",
+      "parameter_name": "ref",
+      "vulnerability_type": "REFLECTED_XSS",
+      "vulnerable": false
+    },
+    {
+      "application_id": "app09",
+      "method": "GET",
+      "canonical_path": "/review",
+      "parameter_location": "QUERY",
+      "parameter_name": "ref",
+      "vulnerability_type": "SQLI",
+      "vulnerable": true
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>랭킹 평가 지표 — demoshop</title>
+<style>
+  :root{
+    --paper:#f6f7f9; --card:#ffffff; --ink:#12161d; --muted:#5b6472;
+    --line:#e3e7ee; --accent:#2f4b7c; --head:#eef1f6;
+    --sqli:#2f6f8f; --xss:#7a5aa8; --bac:#2f7d5f; --safe:#7c8798;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+       line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:36px 28px 72px}
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px;margin-bottom:22px}
+  h1{font-size:23px;margin:0 0 10px;letter-spacing:-.01em}
+  .target{font-family:var(--mono);font-size:13px;color:var(--accent);
+          word-break:break-all;margin-bottom:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;padding:4px 11px;border-radius:999px;
+        border:1px solid var(--line);background:var(--card);font-size:12.5px;
+        font-family:var(--mono);color:var(--muted)}
+  .meta{margin-top:10px;font-size:11px;color:var(--muted);font-family:var(--mono)}
+  section.metric{margin:26px 0}
+  section.metric h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;
+        color:var(--muted);margin:0 0 12px;font-weight:600}
+  .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{background:var(--head);text-align:right;padding:11px 16px;font-size:11px;
+        text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+        border-bottom:1px solid var(--line);white-space:nowrap}
+  thead th[scope=col]:first-child{text-align:left}
+  tbody th[scope=row]{text-align:left;padding:11px 16px;font-weight:500;white-space:nowrap;
+        border-bottom:1px solid var(--line)}
+  tbody td{text-align:right;padding:11px 16px;font-family:var(--mono);
+        border-bottom:1px solid var(--line)}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+  tr.full{background:rgba(47,75,124,.06)}
+  tr.full th[scope=row]{font-weight:700;color:var(--accent)}
+  table.points td{text-align:left}
+  table.points td.num{font-family:var(--mono);color:var(--muted);text-align:right;width:1%}
+  table.points td.path{font-family:var(--mono);color:var(--ink);word-break:break-all}
+  table.points td.param{font-family:var(--mono);color:var(--accent)}
+  table.points td.loc{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+        text-transform:uppercase}
+  tr.is-safe{color:var(--muted)}
+  .tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;
+        font-weight:600;color:#fff;margin:1px 3px 1px 0}
+  .tag.sqli{background:var(--sqli)} .tag.xss{background:var(--xss)}
+  .tag.bac{background:var(--bac)} .tag.safe{background:var(--safe)}
+</style>
+</head>
+<body>
+<div class='wrap'>
+<header><h1>랭킹 평가 지표 — demoshop</h1><div class='target'>대상 &rarr; http://127.0.0.1:8899/portal/</div><div class='chips'><span class='chip'>후보 9개</span><span class='chip'>취약 2개</span><span class='chip'>미라벨 0개</span><span class='chip'>검증 9개</span><span class='chip'>Top-K 20</span></div><div class='meta'>지표 버전 ranking-metrics-v1</div></header>
+<section class='metric'><h2>Recall@K</h2><div class='scroll'><table><thead><tr><th scope='col'>Arm</th><th>K=1</th><th>K=3</th><th>K=5</th><th>K=10</th><th>K=20</th></tr></thead><tbody><tr><th scope='row'>Random predictor</th><td>0.111</td><td>0.333</td><td>0.556</td><td>1.000</td><td>1.000</td></tr><tr><th scope='row'>VulnSpider without focused verification</th><td>0.500</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr class='full'><th scope='row'>VulnSpider (full pipeline)</th><td>0.500</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr><th scope='row'>Random predictor (per-input-point type guess)</th><td>0.120</td><td>0.341</td><td>0.561</td><td>1.000</td><td>1.000</td></tr></tbody></table></div></section><section class='metric'><h2>Precision@K</h2><div class='scroll'><table><thead><tr><th scope='col'>Arm</th><th>K=1</th><th>K=3</th><th>K=5</th><th>K=10</th><th>K=20</th></tr></thead><tbody><tr><th scope='row'>Random predictor</th><td>0.222</td><td>0.222</td><td>0.222</td><td>0.222</td><td>0.222</td></tr><tr><th scope='row'>VulnSpider without focused verification</th><td>1.000</td><td>0.667</td><td>0.400</td><td>0.222</td><td>0.222</td></tr><tr class='full'><th scope='row'>VulnSpider (full pipeline)</th><td>1.000</td><td>0.667</td><td>0.400</td><td>0.222</td><td>0.222</td></tr><tr><th scope='row'>Random predictor (per-input-point type guess)</th><td>0.239</td><td>0.228</td><td>0.224</td><td>0.222</td><td>0.222</td></tr></tbody></table></div></section><section class='metric'><h2>MAP@K</h2><div class='scroll'><table><thead><tr><th scope='col'>Arm</th><th>K=1</th><th>K=3</th><th>K=5</th><th>K=10</th><th>K=20</th></tr></thead><tbody><tr><th scope='row'>Random predictor</th><td>0.222</td><td>0.220</td><td>0.291</td><td>0.400</td><td>0.400</td></tr><tr><th scope='row'>VulnSpider without focused verification</th><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr class='full'><th scope='row'>VulnSpider (full pipeline)</th><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr><th scope='row'>Random predictor (per-input-point type guess)</th><td>0.239</td><td>0.230</td><td>0.301</td><td>0.408</td><td>0.408</td></tr></tbody></table></div></section><section class='metric'><h2>NDCG@K</h2><div class='scroll'><table><thead><tr><th scope='col'>Arm</th><th>K=1</th><th>K=3</th><th>K=5</th><th>K=10</th><th>K=20</th></tr></thead><tbody><tr><th scope='row'>Random predictor</th><td>0.222</td><td>0.290</td><td>0.402</td><td>0.580</td><td>0.580</td></tr><tr><th scope='row'>VulnSpider without focused verification</th><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr class='full'><th scope='row'>VulnSpider (full pipeline)</th><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td><td>1.000</td></tr><tr><th scope='row'>Random predictor (per-input-point type guess)</th><td>0.239</td><td>0.300</td><td>0.410</td><td>0.586</td><td>0.586</td></tr></tbody></table></div></section>
+</div>
+</body>
+</html>

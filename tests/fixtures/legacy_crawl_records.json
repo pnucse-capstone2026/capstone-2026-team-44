@@ -1,0 +1,73 @@
+{
+  "query_multi": [
+    {
+      "link": "http://127.0.0.1/search?q=book&page=1",
+      "parent": "http://127.0.0.1/",
+      "depth": 1,
+      "host": "127.0.0.1",
+      "query_params": "{\"q\":\"book\",\"page\":\"1\"}",
+      "input_fields": "[]",
+      "collected_time": "2026-07-07 10:00:00"
+    }
+  ],
+  "query_repeated_values": [
+    {
+      "link": "http://127.0.0.1/search?q=book",
+      "query_params": "{\"q\":\"book\"}",
+      "input_fields": "[]"
+    },
+    {
+      "link": "http://127.0.0.1/search?q=chair",
+      "query_params": "{\"q\":\"chair\"}",
+      "input_fields": "[]"
+    }
+  ],
+  "form_get": [
+    {
+      "link": "http://127.0.0.1/search",
+      "query_params": "{}",
+      "input_fields": "[{\"name\":\"term\",\"type\":\"text\",\"form_method\":\"GET\",\"form_action\":\"/find\"}]"
+    }
+  ],
+  "form_post": [
+    {
+      "link": "http://127.0.0.1/login",
+      "query_params": "{}",
+      "input_fields": "[{\"name\":\"username\",\"type\":\"text\",\"form_method\":\"POST\",\"form_action\":\"/login\"},{\"name\":\"password\",\"type\":\"password\",\"form_method\":\"POST\",\"form_action\":\"/login\"}]"
+    }
+  ],
+  "same_name_query_and_form": [
+    {
+      "link": "http://127.0.0.1/item?id=42",
+      "query_params": "{\"id\":\"42\"}",
+      "input_fields": "[{\"name\":\"id\",\"type\":\"text\",\"form_method\":\"POST\",\"form_action\":\"/item\"}]"
+    }
+  ],
+  "duplicate_records": [
+    {
+      "link": "http://127.0.0.1/search?q=book",
+      "query_params": "{\"q\":\"book\"}",
+      "input_fields": "[]"
+    },
+    {
+      "link": "http://127.0.0.1/search?q=book",
+      "query_params": "{\"q\":\"book\"}",
+      "input_fields": "[]"
+    }
+  ],
+  "partial_fields": [
+    {
+      "link": "http://127.0.0.1/broken",
+      "query_params": "not-json",
+      "input_fields": "[{\"type\":\"text\",\"form_method\":\"POST\",\"form_action\":\"/broken\"}]"
+    }
+  ],
+  "hidden_input": [
+    {
+      "link": "http://127.0.0.1/submit",
+      "query_params": "{}",
+      "input_fields": "[{\"name\":\"csrf\",\"type\":\"hidden\",\"value\":\"token\",\"form_method\":\"POST\",\"form_action\":\"/submit\"}]"
+    }
+  ]
+}
+

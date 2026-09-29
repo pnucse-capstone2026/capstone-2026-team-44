@@ -1,0 +1,31 @@
+{
+  "model_version": "verification-confidence-model-v1",
+  "max_abs_llr": 1.0,
+  "training_samples": 146,
+  "default_llr": {
+    "SUPPORT_NEW": 0.7,
+    "SUPPORT_REPRODUCED": 0.0,
+    "WEAKEN": -0.7,
+    "INCONCLUSIVE": 0.0,
+    "UNCHANGED": 0.0,
+    "NOT_EXECUTED": 0.0
+  },
+  "family_llr": {
+    "REFLECTED_XSS": {
+      "INCONCLUSIVE": 0.0,
+      "NOT_EXECUTED": 0.0,
+      "SUPPORT_NEW": 0.7,
+      "SUPPORT_REPRODUCED": 1.0,
+      "UNCHANGED": -1.0,
+      "WEAKEN": -1.0
+    },
+    "SQLI": {
+      "INCONCLUSIVE": 0.0,
+      "NOT_EXECUTED": 0.0,
+      "SUPPORT_NEW": 0.7,
+      "SUPPORT_REPRODUCED": 1.0,
+      "UNCHANGED": -0.4071836168658651,
+      "WEAKEN": -0.7
+    }
+  }
+}

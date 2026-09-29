@@ -1,0 +1,9 @@
+{
+  "method_version": "conformal-risk-control-v1",
+  "target_risk": 0.09999999999999998,
+  "corrected_risk_bound": 0.035714285714285685,
+  "threshold": 0.18179159381382962,
+  "empirical_risk": 0.02380952380952381,
+  "calibration_groups": 14,
+  "guarantee_attainable": true
+}

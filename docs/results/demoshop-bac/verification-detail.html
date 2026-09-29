@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VulnSpider 검증 상세 리포트</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b1f24;--muted:#6b7280;--line:#e5e7eb;
+--ok:#0e9f6e;--bad:#e02424;--warn:#c27803;--accent:#2563eb;--code:#f3f4f6;--inj:#fde68a;--injink:#92400e;}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1216;--card:#171b21;--ink:#e6e9ee;--muted:#9aa4b2;--line:#262b33;--ok:#31c48d;--bad:#f98080;--warn:#e3a008;--accent:#60a5fa;--code:#1f242c;--inj:#78500a;--injink:#fde68a;}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 18px;font-size:13px}
+.summary{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:96px}
+.stat b{display:block;font-size:20px}.stat span{color:var(--muted);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 18px}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.rank{font-weight:700;color:var(--muted)}
+.vtype{font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;color:#fff}
+.vtype.sqli{background:#7c3aed}.vtype.xss{background:#0ea5e9}
+.outcome-badge{margin-left:auto}
+.baseline-box{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:10px;overflow-x:auto}
+.blabel{display:inline-block;font-size:11px;font-weight:700;color:var(--muted);margin-right:8px;text-transform:uppercase}
+.req{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;white-space:nowrap}
+.req .m{color:#fff;background:var(--accent);border-radius:4px;padding:1px 6px;font-weight:700;font-size:11px}
+.req .u{color:var(--ink);word-break:break-all}
+.req .bodytag{color:var(--muted);font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+mark.inj{background:var(--inj);color:var(--injink);border-radius:4px;padding:0 3px;font-weight:700}
+.reqval{background:var(--code);padding:2px 6px;border-radius:5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.narrative{margin:8px 0 12px}.delta{font-weight:700}
+.confbar{margin:0 0 14px}.bar{height:8px;background:var(--code);border-radius:5px;overflow:hidden;margin:3px 0}
+.fill{height:100%}.fill.prior{background:var(--muted)}.fill.final{background:var(--accent)}
+.conflabels{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+table.payloads{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+table.payloads th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:6px 8px}
+table.payloads td{padding:7px 8px;vertical-align:top;border-bottom:1px solid var(--line)}
+.payload-row td{border-bottom:none}.idx{color:var(--muted)}.num{text-align:right;font-variant-numeric:tabular-nums}
+.pv{max-width:560px;overflow-x:auto}
+.fam{color:var(--muted);font-size:12px}.sig{color:var(--muted);font-size:11px;margin-top:2px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.pill.ok{background:var(--ok)}.pill.bad{background:var(--bad)}.pill.warn{background:var(--warn)}
+.pill.muted{background:var(--muted)}.reason{color:var(--bad);font-size:11px}
+.detail-row td{padding-top:0;padding-bottom:12px}
+.rationale{font-size:12px;color:var(--muted);margin:2px 0 6px}
+.rationale .tag{display:inline-block;background:var(--code);color:var(--ink);border-radius:5px;padding:1px 6px;margin-right:6px;font-weight:600}
+ul.evidence{margin:4px 0;padding-left:18px;font-size:12px;color:var(--muted)}
+ul.evidence code{background:var(--code);padding:1px 4px;border-radius:4px}
+.dir{color:var(--accent)}.flips{font-size:12px;color:var(--muted);margin-top:4px}
+.flips code{background:var(--code);padding:1px 5px;border-radius:4px}
+.muted-text{color:var(--muted)}
+footer{color:var(--muted);font-size:12px;margin-top:24px;text-align:center}
+</style></head><body><div class="wrap">
+<h1>VulnSpider · 변형 페이로드 검증 상세 리포트</h1>
+<p class="sub">target <b>http://127.0.0.1:8899/portal/</b> · provider deterministic-baseline · 생성 2026-09-25 00:16:29 · source <code>focused verification (in-memory)</code> · 요청 URL은 크롤 결과와 조인해 구성</p>
+<div class="summary"><div class='stat'><b>6</b><span>검증 후보</span></div><div class='stat'><b>24</b><span>변형 페이로드</span></div><div class='stat'><b>24</b><span>검증기 통과</span></div><div class='stat'><b>0</b><span>검증기 차단</span></div><div class='stat'><b>0</b><span>SUPPORTED</span></div><div class='stat'><b>6</b><span>WEAKENED</span></div></div>
+
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#1</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill muted outcome-badge">UNCHANGED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=5001</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=5001</mark></span></span> 의 <code>card_id</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>UNCHANGED</b> (신호 <code>UNCHANGED</code>)로 판정되어, confidence 는 <b>0.550</b> → <b>0.448</b> (<span class='delta'>-0.101</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:55.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:44.8%"></div></div>
+        <div class="conflabels"><span>prior 0.550</span><span>final 0.448</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=VULNSPIDER_A3F123BA83D7D649&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.101</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.03640455387873974 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=VULNSPIDER_21E408CE878B4623&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.101</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.03640455387873974 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=VULNSPIDER_AE5115AAFD9E91DC&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.101</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.03627217368281705 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.101</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.04103786073603389 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#2</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill warn outcome-badge">WEAKENED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=880</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=880</mark></span></span> 의 <code>thread</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>WEAKENED</b> (신호 <code>WEAKEN</code>)로 판정되어, confidence 는 <b>0.435</b> → <b>0.221</b> (<span class='delta'>-0.214</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:43.5%"></div></div>
+        <div class="bar"><div class="fill final" style="width:22.1%"></div></div>
+        <div class="conflabels"><span>prior 0.435</span><span>final 0.221</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=VULNSPIDER_2754CA42434FAE96Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=VULNSPIDER_BA75366C2ABB9391Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.030761472516389308 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=2147483648</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.03277861825516894 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#3</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill warn outcome-badge">WEAKENED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=4100</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=4100</mark></span></span> 의 <code>ref</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>WEAKENED</b> (신호 <code>WEAKEN</code>)로 판정되어, confidence 는 <b>0.435</b> → <b>0.220</b> (<span class='delta'>-0.214</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:43.5%"></div></div>
+        <div class="bar"><div class="fill final" style="width:22.0%"></div></div>
+        <div class="conflabels"><span>prior 0.435</span><span>final 0.220</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=VULNSPIDER_280D4F8F93898748Z&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=VULNSPIDER_7D3CA77688BA3B00Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.02762299940723177 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=2147483648</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.214</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.02951985773562537 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#4</span>
+        <span class="vtype xss">REFLECTED_XSS</span>
+        <span class="pill warn outcome-badge">WEAKENED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=5001</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=5001</mark></span></span> 의 <code>card_id</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>WEAKENED</b> (신호 <code>WEAKEN</code>)로 판정되어, confidence 는 <b>0.390</b> → <b>0.190</b> (<span class='delta'>-0.199</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:39.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:19.0%"></div></div>
+        <div class="conflabels"><span>prior 0.390</span><span>final 0.190</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=VULNSPIDER_B314F692540C698BZ&lt;&gt;&quot;&#x27;Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=VULNSPIDER_9E259A9F288D3DD2Z&lt;&gt;&quot;&#x27;`/=()Z</mark></span></span></td>
+        <td class="fam">HTML_SENTINEL</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill warn">WEAKENED</span><div class="sig">WEAKEN</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Reflect an identifier plus raw HTML-significant characters to test whether the app entity-encodes them.</div>
+        <ul class='evidence'><li><code>safe_html_encoding_detected</code>: 1.0 → 1.0 <span class='dir'>(up)</span> — The reflected sentinel came back entity-encoded; the app defends this context, so confidence is lowered.</li></ul>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.04103786073603389 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/card?<mark class='inj'>card_id=2147483648</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.199</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03269790839290442 → 0.03997881916865237 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#5</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill muted outcome-badge">UNCHANGED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=880</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=880</mark></span></span> 의 <code>thread</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>UNCHANGED</b> (신호 <code>UNCHANGED</code>)로 판정되어, confidence 는 <b>0.231</b> → <b>0.167</b> (<span class='delta'>-0.064</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:23.1%"></div></div>
+        <div class="bar"><div class="fill final" style="width:16.7%"></div></div>
+        <div class="conflabels"><span>prior 0.231</span><span>final 0.167</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=VULNSPIDER_365ED13107BEF369&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.038577912254160365 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=VULNSPIDER_CBC5D0C60DB8F896&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.038577912254160365 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=VULNSPIDER_08AC8F8B229ACDCB&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.038830055471507814 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/message?<mark class='inj'>thread=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.04261220373171962 → 0.030761472516389308 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <span class="rank">#6</span>
+        <span class="vtype sqli">SQLI</span>
+        <span class="pill muted outcome-badge">UNCHANGED</span>
+      </div>
+      <div class="baseline-box">
+        <span class="blabel">baseline 요청</span>
+        <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=4100</mark></span></span>
+      </div>
+      <p class='narrative'>baseline 요청 <span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=4100</mark></span></span> 의 <code>ref</code> 파라미터를 변형 페이로드 <b>4</b>개로 치환해 재프로브했습니다. 검증기가 <b>4</b>개 통과·<b>0</b>개 차단했고, 실행된 <b>4</b>개의 결과가 <b>UNCHANGED</b> (신호 <code>UNCHANGED</code>)로 판정되어, confidence 는 <b>0.230</b> → <b>0.166</b> (<span class='delta'>-0.064</span>) 로 갱신되었습니다.</p>
+      <div class="confbar" title="prior → final">
+        <div class="bar"><div class="fill prior" style="width:23.0%"></div></div>
+        <div class="bar"><div class="fill final" style="width:16.6%"></div></div>
+        <div class="conflabels"><span>prior 0.230</span><span>final 0.166</span></div>
+      </div>
+      <table class="payloads">
+        <thead><tr>
+          <th>#</th><th>변형 요청 (mutated request)</th><th>family</th>
+          <th>검증기</th><th>결과 / 신호</th><th>Δconf</th>
+        </tr></thead>
+        <tbody>
+      <tr class="payload-row">
+        <td class="idx">1</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=VULNSPIDER_458B65368F9C3BDD&#x27;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.034973325429756966 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">2</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=VULNSPIDER_914C9037AD04F9E2&quot;</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.034973325429756966 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">3</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=VULNSPIDER_F0DEE682E0A935E4&#x27;)</mark></span></span></td>
+        <td class="fam">SQL_META</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Append a single SQL metacharacter to elicit a database syntax-error signal without any state-changing keyword.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.035210432720806165 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr>
+      <tr class="payload-row">
+        <td class="idx">4</td>
+        <td class="pv"><span class='req'><span class='m'>GET</span> <span class='u'>http://127.0.0.1:8899/portal/order?<mark class='inj'>ref=-1</mark></span></span></td>
+        <td class="fam">BOUNDARY</td>
+        <td><span class="pill ok">통과</span></td>
+        <td><span class="pill muted">UNCHANGED</span><div class="sig">UNCHANGED</div></td>
+        <td class="num">-0.064</td>
+      </tr>
+      <tr class="detail-row"><td></td><td colspan="5">
+        <div class="rationale"><span class="tag">모델 근거</span> Send an out-of-range integer to distinguish a genuine boundary weakness from generic error handling.</div>
+        <ul class='evidence'><li><code>response_length_diff_ratio</code>: 0.03876704208654416 → 0.02762299940723177 <span class='dir'>(flat)</span> — The re-probe barely moved the feature vector; the prior confidence is kept.</li></ul><div class='flips'>관측 전환(observability flips): <code>marker_reflected</code>, <code>reflection_count_norm</code>, <code>safe_html_encoding_detected</code></div>
+      </td></tr></tbody>
+      </table>
+    </section>
+<footer>각 변형 페이로드는 전송 전에 결정적 PayloadValidator를 통과했으며, 재프로브는 loopback 대상에 한정됩니다. 변형 요청 값은 모델이 생성한 원문 그대로(HTML 문자만 이스케이프) 표시됩니다.</footer>
+</div></body></html>

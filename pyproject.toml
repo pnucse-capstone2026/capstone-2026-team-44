@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vulnspider"
+version = "0.1.0"
+description = "Input-point-based web vulnerability candidate prioritization prototype."
+readme = "README_START_HERE.md"
+requires-python = ">=3.11"
+dependencies = [
+    "tqdm>=4.66,<5",
+]
+
+[project.optional-dependencies]
+dynamic = ["playwright>=1.48,<2"]
+
+[project.scripts]
+vulnspider = "vulnspider.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
